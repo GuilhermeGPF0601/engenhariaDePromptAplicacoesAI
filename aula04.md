@@ -1,9 +1,9 @@
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|--------------------------------------------------------------------------------------------------------------------------------------|
 
 Pergunta 1:
 Crie um cadastro de clientes em python
 
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|--------------------------------------------------------------------------------------------------------------------------------------|
 
 Resposta:
 # Cadastro de Clientes em Python
@@ -69,15 +69,19 @@ def menu():
 # Executa o sistema
 menu()
 
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|--------------------------------------------------------------------------------------------------------------------------------------|
 
 Pergunta 2: 
 Você é um instrutor de python experiente,
-crie um cadastro de login de clientes incluindo tratamento de erros rigoroso para varios tipos de erros que podem acontecer,
-forneça o codigo python extremamente comentado para que um programador python iniciante consiga entender e bem estruturado de fácil entendimento. 
+crie um cadastro de login de clientes incluindo tratamento de erros rigoroso para 
+varios tipos de erros que podem acontecer,
+forneça o codigo python extremamente comentado para que um programador 
+python iniciante consiga entender 
+e bem estruturado de fácil entendimento. 
 Seguido de 3 testes realizados com o código
 
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|--------------------------------------------------------------------------------------------------------------------------------------|
+
 Resposta:
 """
 Sistema de Cadastro e Login de Clientes
