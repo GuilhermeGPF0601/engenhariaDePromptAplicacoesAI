@@ -298,7 +298,7 @@
             background: rgba(99, 102, 241, 0.1);
         }
 
-        #fileInput {
+        #fotoUpload {
             display: none;
         }
 
@@ -368,16 +368,18 @@
 
         .visual-content {
             text-align: center;
-            font-size: 4rem;
+            font-size: 3rem;
             margin: 1rem 0;
-            line-height: 1;
+            line-height: 1.5;
+            word-wrap: break-word;
         }
 
         .meme-image {
             width: 100%;
             max-width: 500px;
             border-radius: 0.5rem;
-            margin: 1rem 0;
+            margin: 1rem auto;
+            display: block;
         }
 
         .steps {
@@ -397,11 +399,13 @@
             font-weight: bold;
             color: var(--secondary);
             font-size: 1.1rem;
+            display: block;
+            margin-bottom: 0.25rem;
         }
 
         .step-text {
             color: var(--text);
-            margin-top: 0.5rem;
+            margin-top: 0;
         }
 
         .copy-btn {
@@ -756,24 +760,22 @@
                 area: 'Computação',
                 traducao: 'Um ponto onde tudo fica lento. Tipo quando você quer ir pra casa mas tem um único portão no estacionamento... todo mundo passa por ali e vira caos!',
                 exemplo: 'Se seu servidor aguenta 1000 requisições por segundo mas o banco de dados só consegue processar 100, ali é seu bottleneck.',
-                visual: '🔴 ➡️ 🟢 (Tá vendo o engarrafamento no meio?)',
-                meme: 'https://media.giphy.com/media/3ohzdKdb7FbJrngM7u/giphy.gif',
+                visual: '🔴 ➡️ 🟢',
                 passos: [
-                    '1️⃣ Identifique: Onde o sistema fica mais lento?',
-                    '2️⃣ Analise: Qual componente é o culpado?',
-                    '3️⃣ Otimize: Melhore esse componente específico!'
+                    { emoji: '1️⃣', texto: 'Identifique: Onde o sistema fica mais lento?' },
+                    { emoji: '2️⃣', texto: 'Analise: Qual componente é o culpado?' },
+                    { emoji: '3️⃣', texto: 'Otimize: Melhore esse componente específico!' }
                 ]
             },
             'branch': {
                 area: 'Computação',
                 traducao: 'Uma "cópia paralela" do seu projeto. Você pode mexer nela sem destruir o projeto original. Tipo copiar um arquivo pra mexer e deixar o original intacto.',
                 exemplo: 'Você tá trabalhando numa funcionalidade nova enquanto seu colega corrige um bug. Vocês tão em branches diferentes! Depois juntam tudo.',
-                visual: '🌳 (Git Flow é tipo uma árvore com galhos)',
-                meme: 'https://media.giphy.com/media/l0HlDtKo5QZPh0XO8/giphy.gif',
+                visual: '🌳',
                 passos: [
-                    '1️⃣ Crie: git checkout -b minha-branch',
-                    '2️⃣ Trabalhe: faça suas mudanças normalmente',
-                    '3️⃣ Junta: faça um pull request pra main'
+                    { emoji: '1️⃣', texto: 'Crie: git checkout -b minha-branch' },
+                    { emoji: '2️⃣', texto: 'Trabalhe: faça suas mudanças normalmente' },
+                    { emoji: '3️⃣', texto: 'Junta: faça um pull request pra main' }
                 ]
             },
             'brunoise': {
@@ -781,47 +783,43 @@
                 traducao: 'Cortar algo bem pequenininho em cubinhos bem uniformes. Tipo picar uma cebola em quadradinhos de 3mm. Fica bonito e cozinha tudo igual.',
                 exemplo: 'Quando você vê aquela cenoura em cubinhos minúsculos em uma receita gourmet, aquilo é brunoise! Parece sem importância mas afeta como o prato fica.',
                 visual: '🧅 ➡️ ⬜⬜⬜',
-                meme: 'https://media.giphy.com/media/l0CYY6Ze1ia0NWzkQ/giphy.gif',
                 passos: [
-                    '1️⃣ Limpe: retire as cascas e partes ruins',
-                    '2️⃣ Corte: use uma faca afiada em movimentos precisos',
-                    '3️⃣ Uniformize: mantenha o tamanho consistente!'
+                    { emoji: '1️⃣', texto: 'Limpe: retire as cascas e partes ruins' },
+                    { emoji: '2️⃣', texto: 'Corte: use uma faca afiada em movimentos precisos' },
+                    { emoji: '3️⃣', texto: 'Uniformize: mantenha o tamanho consistente!' }
                 ]
             },
             'iteração': {
                 area: 'Computação',
                 traducao: 'Repetir um processo várias vezes, cada vez melhorando um pouco. Como tentar várias vezes até acertar, aprendendo com cada tentativa.',
                 exemplo: 'Na programação, você roda o código, vê que não funcionou, corrige, roda de novo. Cada rodada é uma iteração. Você itera até ficar perfeito!',
-                visual: '🔄 ♻️ 🔄 (Repetir e melhorar)',
-                meme: 'https://media.giphy.com/media/pzQxaWXKqpwcJQ0XxB/giphy.gif',
+                visual: '🔄 ♻️ 🔄',
                 passos: [
-                    '1️⃣ Execute: rode o código/processo',
-                    '2️⃣ Analise: o que saiu errado?',
-                    '3️⃣ Melhore: ajuste e repita!'
+                    { emoji: '1️⃣', texto: 'Execute: rode o código/processo' },
+                    { emoji: '2️⃣', texto: 'Analise: o que saiu errado?' },
+                    { emoji: '3️⃣', texto: 'Melhore: ajuste e repita!' }
                 ]
             },
             'commit': {
                 area: 'Computação',
                 traducao: 'Salvar uma "foto" do seu código em um momento específico. É como tirar um screenshot do seu trabalho com uma descrição do que você fez.',
                 exemplo: 'Você termina de consertar um bug, faz um commit dizendo "Corrigido o erro de login". Depois, se tudo quebrar, você consegue voltar pra esse snapshot!',
-                visual: '💾 📸 ✔️ (Salvando progresso)',
-                meme: 'https://media.giphy.com/media/WTWlMKKzDW16SJsysT/giphy.gif',
+                visual: '💾 📸 ✔️',
                 passos: [
-                    '1️⃣ Organize: stage as mudanças (git add)',
-                    '2️⃣ Descreva: escreva uma mensagem clara',
-                    '3️⃣ Confirme: git commit -m "sua mensagem"'
+                    { emoji: '1️⃣', texto: 'Organize: stage as mudanças (git add)' },
+                    { emoji: '2️⃣', texto: 'Descreva: escreva uma mensagem clara' },
+                    { emoji: '3️⃣', texto: 'Confirme: git commit -m "sua mensagem"' }
                 ]
             },
             'pull request': {
                 area: 'Computação',
                 traducao: 'Um pedido pra "puxar" suas mudanças pro projeto principal. Tipo dizer "ó pessoal, eu fiz uma coisa legal aqui, alguém revisa pra gente juntar?"',
                 exemplo: 'Você terminou uma funcionalidade na sua branch, abre um PR. Seus colegas analisam, sugerem mudanças, você ajusta e pronto - merge!',
-                visual: '🤝 (Pedindo revisão e aprovação)',
-                meme: 'https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif',
+                visual: '🤝',
                 passos: [
-                    '1️⃣ Abra: crie um PR no GitHub/GitLab',
-                    '2️⃣ Descreva: explique que mudanças fez',
-                    '3️⃣ Espere: a galera revisa e aprova!'
+                    { emoji: '1️⃣', texto: 'Abra: crie um PR no GitHub/GitLab' },
+                    { emoji: '2️⃣', texto: 'Descreva: explique que mudanças fez' },
+                    { emoji: '3️⃣', texto: 'Espere: a galera revisa e aprova!' }
                 ]
             }
         };
@@ -893,7 +891,8 @@
             const resultado = baseTermos[termo];
 
             if (!resultado) {
-                alert(`Ué, "${termo}" ainda não tá no Decifra! 🤔\n\nMas temos esses: ${Object.keys(baseTermos).join(', ')}`);
+                const termoDisponivel = Object.keys(baseTermos).join(', ');
+                alert(`Ué, "${termo}" ainda não tá no Decifra! 🤔\n\nMas temos esses: ${termoDisponivel}`);
                 return;
             }
 
@@ -907,19 +906,10 @@
             document.getElementById('exemplo').textContent = resultado.exemplo;
             document.getElementById('visual').textContent = resultado.visual;
 
-            // MOSTRAR MEME (se existir)
-            const memeImg = document.getElementById('memeImage');
-            if (resultado.meme) {
-                memeImg.src = resultado.meme;
-                memeImg.style.display = 'block';
-            } else {
-                memeImg.style.display = 'none';
-            }
-
-            // PREENCHER PASSOS
+            // PREENCHER PASSOS (CORRIGIDO)
             const passosDiv = document.getElementById('passos');
             passosDiv.innerHTML = resultado.passos.map(passo => 
-                `<div class="step"><div class="step-number">${passo.split('️⃣')[0]}️⃣</div><div class="step-text">${passo.split('️⃣')[1]}</div></div>`
+                `<div class="step"><span class="step-number">${passo.emoji}</span><div class="step-text">${passo.texto}</div></div>`
             ).join('');
 
             // MOSTRAR OUTPUT
