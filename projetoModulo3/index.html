@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔍 Decifra - Tradutor de Jargão Acadêmico</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #f97316;
+            --success: #10b981;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* FEATURES SECTION */
+        .features {
+            padding: 3rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+        }
+
+        /* AREAS SUPPORTED */
+        .areas {
+            padding: 3rem 2rem;
+            background: white;
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .area-badge {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 0.8rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .area-badge:hover {
+            transform: scale(1.05);
+        }
+
+        /* TRANSLATOR SECTION */
+        .translator {
+            padding: 3rem 2rem;
+            background: white;
+            margin: 2rem 0;
+            border-radius: 1rem;
+            box-shadow: var(--shadow);
+        }
+
+        .translator h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .input-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.8rem;
+            border: 2px solid var(--border);
+            border-radius: 0.5rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .upload-zone {
+            border: 2px dashed var(--border);
+            border-radius: 0.8rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(99, 102, 241, 0.02);
+        }
+
+        .upload-zone:hover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .upload-zone.dragover {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        #fileInput {
+            display: none;
+        }
+
+        .file-preview {
+            margin-top: 1rem;
+            max-width: 150px;
+            border-radius: 0.5rem;
+        }
+
+        .btn-translate {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            padding: 1rem;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-translate:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* OUTPUT SECTION */
+        .output-section {
+            display: none;
+            margin-top: 2rem;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .output-section.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .output-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 0.8rem;
+            border-left: 4px solid var(--primary);
+            position: relative;
+        }
+
+        .output-card.visual {
+            border-left-color: var(--secondary);
+            grid-column: 1 / -1;
+        }
+
+        .output-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .output-card.visual h3 {
+            color: var(--secondary);
+        }
+
+        .output-card p {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .visual-content {
+            text-align: center;
+            font-size: 4rem;
+            margin: 1rem 0;
+            line-height: 1;
+        }
+
+        .meme-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .steps {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .step {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 3px solid var(--secondary);
+        }
+
+        .step-number {
+            font-weight: bold;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .step-text {
+            color: var(--text);
+            margin-top: 0.5rem;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.05);
+        }
+
+        .copy-btn.copied {
+            background: var(--success);
+        }
+
+        /* HISTORY */
+        .history-section {
+            margin-top: 2rem;
+            background: rgba(99, 102, 241, 0.05);
+            padding: 1.5rem;
+            border-radius: 0.8rem;
+        }
+
+        .history-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .history-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .history-item {
+            background: white;
+            padding: 0.6rem 1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .history-item:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content p {
+            margin: 0.5rem 0;
+            opacity: 0.9;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* ANIMATIONS */
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .input-section {
+                grid-template-columns: 1fr;
+            }
+
+            .output-section.active {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+
+        /* DEMO BUTTON */
+        .demo-highlight {
+            background: #fef3c7;
+            padding: 0.3rem 0.6rem;
+            border-radius: 0.3rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">🔍 Decifra</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a onclick="scrollToSection('features')">Como Funciona</a></li>
+                    <li><a onclick="scrollToSection('translator')">Tradutor</a></li>
+                    <li><a onclick="scrollToSection('areas')">Áreas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🎓 Decifra</h1>
+            <p>Perdido no jargão técnico? Traduzimos o complicado em simples!</p>
+            <p style="font-size: 0.95rem; opacity: 0.9;">Para calouros e calouras que querem entender tudo na hora</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="scrollToSection('translator')">Começar Agora</button>
+                <button class="btn btn-secondary" onclick="loadDemo()">👀 Ver Demo</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Como Funciona? 🧠</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">✍️</div>
+                    <h3>Digite o Termo</h3>
+                    <p>Escreva aquele jargão confuso que o professor falou. Ex: "Bottleneck", "Branch", "Brunoise"</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎓</div>
+                    <h3>Escolha a Área</h3>
+                    <p>Selecione se é de Computação, Culinária, Economia ou Design para contexto certo</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📸</div>
+                    <h3>Envie Foto (Opcional)</h3>
+                    <p>Tira foto da página do livro ou slide? Manda pra gente entender melhor o contexto!</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Tradução Simples</h3>
+                    <p>Recebe uma explicação clara como se fosse um amigo explicando no WhatsApp</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💡</div>
+                    <h3>Exemplo Prático</h3>
+                    <p>Uma analogia ou exemplo real que faz o conceito clicar na sua cabeça</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Visual + Passo-a-Passo</h3>
+                    <p>Meme, emoji ou infográfico + 3 passos práticos pra usar aquilo agora mesmo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AREAS SUPPORTED -->
+    <section id="areas" class="areas">
+        <div class="container">
+            <h2 class="section-title">Áreas de Estudo 🏆</h2>
+            <div class="areas-grid">
+                <div class="area-badge" onclick="selectArea('Computação')">
+                    💻 Computação
+                </div>
+                <div class="area-badge" onclick="selectArea('Culinária')">
+                    👨‍🍳 Culinária
+                </div>
+                <div class="area-badge" onclick="selectArea('Economia')">
+                    📊 Economia
+                </div>
+                <div class="area-badge" onclick="selectArea('Design')">
+                    🎨 Design
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSLATOR -->
+    <section id="translator" class="container">
+        <div class="translator">
+            <h2>🔄 Tradutor de Jargão</h2>
+            
+            <div class="input-section">
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label for="termo">📝 Qual é o termo complicado?</label>
+                    <input type="text" id="termo" placeholder="Ex: Bottleneck, Brunoise, Branch..." value="">
+                </div>
+
+                <div class="form-group">
+                    <label for="area">🎓 Área de Estudo</label>
+                    <select id="area">
+                        <option value="">-- Escolha uma área --</option>
+                        <option value="Computação">💻 Computação</option>
+                        <option value="Culinária">👨‍🍳 Culinária</option>
+                        <option value="Economia">📊 Economia</option>
+                        <option value="Design">🎨 Design</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="contexto">💭 Contexto (Opcional)</label>
+                    <textarea id="contexto" placeholder="Ex: Apareceu num slide sobre otimização..."></textarea>
+                </div>
+
+                <div class="form-group" style="grid-column: 1 / -1;">
+                    <label for="fotoUpload">📸 Envie uma Foto (Opcional)</label>
+                    <div class="upload-zone" id="uploadZone">
+                        <p>📁 Arraste a foto aqui ou clique para selecionar</p>
+                        <input type="file" id="fotoUpload" accept="image/*">
+                        <img id="filePreview" class="file-preview" style="display: none;">
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-translate" onclick="traduzir()">✨ Decifra Esse Termo!</button>
+
+            <!-- OUTPUT -->
+            <div id="outputSection" class="output-section">
+                <!-- Tradução Sem Frescura -->
+                <div class="output-card">
+                    <h3>🎯 Tradução Sem Frescura</h3>
+                    <button class="copy-btn" onclick="copyToClipboard(this, 'traducao')">Copiar</button>
+                    <div id="traducao" class="output-text"></div>
+                </div>
+
+                <!-- Exemplo Prático -->
+                <div class="output-card">
+                    <h3>💡 Exemplo Prático</h3>
+                    <button class="copy-btn" onclick="copyToClipboard(this, 'exemplo')">Copiar</button>
+                    <div id="exemplo" class="output-text"></div>
+                </div>
+
+                <!-- Visual/Meme -->
+                <div class="output-card visual">
+                    <h3>🎨 Visualização Instantânea</h3>
+                    <div class="visual-content" id="visual"></div>
+                    <img id="memeImage" class="meme-image" style="display: none;">
+                </div>
+
+                <!-- Passo a Passo -->
+                <div class="output-card">
+                    <h3>📍 Passo a Passo</h3>
+                    <div class="steps" id="passos"></div>
+                </div>
+
+                <!-- Compartilhar -->
+                <div class="output-card">
+                    <h3>📤 Compartilhar</h3>
+                    <button class="btn btn-primary" onclick="compartilhar()" style="width: 100%;">
+                        Compartilhar Resultado
+                    </button>
+                </div>
+            </div>
+
+            <!-- HISTÓRICO -->
+            <div id="historySection" class="history-section" style="display: none;">
+                <div class="history-title">📚 Histórico de Buscas</div>
+                <div class="history-items" id="historyItems"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <p><strong>🔍 Decifra</strong> - Seu Tradutor de Jargão Acadêmico</p>
+            <p>Feito para calouros e calouras que querem entender tudo na primeira vez</p>
+            <div class="footer-links">
+                <a href="#features">Como Funciona</a>
+                <a href="#translator">Tradutor</a>
+                <a href="#areas">Áreas</a>
+            </div>
+            <p style="margin-top: 1.5rem; opacity: 0.7; font-size: 0.9rem;">© 2026 Decifra - Design Sprint do Governo | UDF</p>
+        </div>
+    </footer>
+
+    <script>
+        // BASE DE TERMOS
+        const baseTermos = {
+            'bottleneck': {
+                area: 'Computação',
+                traducao: 'Um ponto onde tudo fica lento. Tipo quando você quer ir pra casa mas tem um único portão no estacionamento... todo mundo passa por ali e vira caos!',
+                exemplo: 'Se seu servidor aguenta 1000 requisições por segundo mas o banco de dados só consegue processar 100, ali é seu bottleneck.',
+                visual: '🔴 ➡️ 🟢 (Tá vendo o engarrafamento no meio?)',
+                meme: 'https://media.giphy.com/media/3ohzdKdb7FbJrngM7u/giphy.gif',
+                passos: [
+                    '1️⃣ Identifique: Onde o sistema fica mais lento?',
+                    '2️⃣ Analise: Qual componente é o culpado?',
+                    '3️⃣ Otimize: Melhore esse componente específico!'
+                ]
+            },
+            'branch': {
+                area: 'Computação',
+                traducao: 'Uma "cópia paralela" do seu projeto. Você pode mexer nela sem destruir o projeto original. Tipo copiar um arquivo pra mexer e deixar o original intacto.',
+                exemplo: 'Você tá trabalhando numa funcionalidade nova enquanto seu colega corrige um bug. Vocês tão em branches diferentes! Depois juntam tudo.',
+                visual: '🌳 (Git Flow é tipo uma árvore com galhos)',
+                meme: 'https://media.giphy.com/media/l0HlDtKo5QZPh0XO8/giphy.gif',
+                passos: [
+                    '1️⃣ Crie: git checkout -b minha-branch',
+                    '2️⃣ Trabalhe: faça suas mudanças normalmente',
+                    '3️⃣ Junta: faça um pull request pra main'
+                ]
+            },
+            'brunoise': {
+                area: 'Culinária',
+                traducao: 'Cortar algo bem pequenininho em cubinhos bem uniformes. Tipo picar uma cebola em quadradinhos de 3mm. Fica bonito e cozinha tudo igual.',
+                exemplo: 'Quando você vê aquela cenoura em cubinhos minúsculos em uma receita gourmet, aquilo é brunoise! Parece sem importância mas afeta como o prato fica.',
+                visual: '🧅 ➡️ ⬜⬜⬜',
+                meme: 'https://media.giphy.com/media/l0CYY6Ze1ia0NWzkQ/giphy.gif',
+                passos: [
+                    '1️⃣ Limpe: retire as cascas e partes ruins',
+                    '2️⃣ Corte: use uma faca afiada em movimentos precisos',
+                    '3️⃣ Uniformize: mantenha o tamanho consistente!'
+                ]
+            },
+            'iteração': {
+                area: 'Computação',
+                traducao: 'Repetir um processo várias vezes, cada vez melhorando um pouco. Como tentar várias vezes até acertar, aprendendo com cada tentativa.',
+                exemplo: 'Na programação, você roda o código, vê que não funcionou, corrige, roda de novo. Cada rodada é uma iteração. Você itera até ficar perfeito!',
+                visual: '🔄 ♻️ 🔄 (Repetir e melhorar)',
+                meme: 'https://media.giphy.com/media/pzQxaWXKqpwcJQ0XxB/giphy.gif',
+                passos: [
+                    '1️⃣ Execute: rode o código/processo',
+                    '2️⃣ Analise: o que saiu errado?',
+                    '3️⃣ Melhore: ajuste e repita!'
+                ]
+            },
+            'commit': {
+                area: 'Computação',
+                traducao: 'Salvar uma "foto" do seu código em um momento específico. É como tirar um screenshot do seu trabalho com uma descrição do que você fez.',
+                exemplo: 'Você termina de consertar um bug, faz um commit dizendo "Corrigido o erro de login". Depois, se tudo quebrar, você consegue voltar pra esse snapshot!',
+                visual: '💾 📸 ✔️ (Salvando progresso)',
+                meme: 'https://media.giphy.com/media/WTWlMKKzDW16SJsysT/giphy.gif',
+                passos: [
+                    '1️⃣ Organize: stage as mudanças (git add)',
+                    '2️⃣ Descreva: escreva uma mensagem clara',
+                    '3️⃣ Confirme: git commit -m "sua mensagem"'
+                ]
+            },
+            'pull request': {
+                area: 'Computação',
+                traducao: 'Um pedido pra "puxar" suas mudanças pro projeto principal. Tipo dizer "ó pessoal, eu fiz uma coisa legal aqui, alguém revisa pra gente juntar?"',
+                exemplo: 'Você terminou uma funcionalidade na sua branch, abre um PR. Seus colegas analisam, sugerem mudanças, você ajusta e pronto - merge!',
+                visual: '🤝 (Pedindo revisão e aprovação)',
+                meme: 'https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif',
+                passos: [
+                    '1️⃣ Abra: crie um PR no GitHub/GitLab',
+                    '2️⃣ Descreva: explique que mudanças fez',
+                    '3️⃣ Espere: a galera revisa e aprova!'
+                ]
+            }
+        };
+
+        let historico = JSON.parse(localStorage.getItem('decifraHistorico')) || [];
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function selectArea(area) {
+            document.getElementById('area').value = area;
+            scrollToSection('translator');
+        }
+
+        // UPLOAD DE FOTO
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fotoUpload');
+        const filePreview = document.getElementById('filePreview');
+
+        uploadZone.addEventListener('click', () => fileInput.click());
+
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                fileInput.files = files;
+                mostrarPreview();
+            }
+        });
+
+        fileInput.addEventListener('change', mostrarPreview);
+
+        function mostrarPreview() {
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    filePreview.src = e.target.result;
+                    filePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // TRADUZIR
+        function traduzir() {
+            const termo = document.getElementById('termo').value.toLowerCase().trim();
+            const area = document.getElementById('area').value;
+
+            if (!termo) {
+                alert('Digite um termo primeiro! 📝');
+                return;
+            }
+
+            const resultado = baseTermos[termo];
+
+            if (!resultado) {
+                alert(`Ué, "${termo}" ainda não tá no Decifra! 🤔\n\nMas temos esses: ${Object.keys(baseTermos).join(', ')}`);
+                return;
+            }
+
+            if (area && resultado.area !== area) {
+                alert(`⚠️ "${termo}" é de ${resultado.area}, não de ${area}. Deixa eu ajustar...`);
+                document.getElementById('area').value = resultado.area;
+            }
+
+            // PREENCHER OUTPUTS
+            document.getElementById('traducao').textContent = resultado.traducao;
+            document.getElementById('exemplo').textContent = resultado.exemplo;
+            document.getElementById('visual').textContent = resultado.visual;
+
+            // MOSTRAR MEME (se existir)
+            const memeImg = document.getElementById('memeImage');
+            if (resultado.meme) {
+                memeImg.src = resultado.meme;
+                memeImg.style.display = 'block';
+            } else {
+                memeImg.style.display = 'none';
+            }
+
+            // PREENCHER PASSOS
+            const passosDiv = document.getElementById('passos');
+            passosDiv.innerHTML = resultado.passos.map(passo => 
+                `<div class="step"><div class="step-number">${passo.split('️⃣')[0]}️⃣</div><div class="step-text">${passo.split('️⃣')[1]}</div></div>`
+            ).join('');
+
+            // MOSTRAR OUTPUT
+            document.getElementById('outputSection').classList.add('active');
+
+            // ADICIONAR AO HISTÓRICO
+            if (!historico.includes(termo)) {
+                historico.unshift(termo);
+                if (historico.length > 10) historico.pop();
+                localStorage.setItem('decifraHistorico', JSON.stringify(historico));
+                atualizarHistorico();
+            }
+
+            // SCROLL
+            setTimeout(() => {
+                document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        function atualizarHistorico() {
+            const historySection = document.getElementById('historySection');
+            const historyItems = document.getElementById('historyItems');
+
+            if (historico.length > 0) {
+                historySection.style.display = 'block';
+                historyItems.innerHTML = historico.map(termo =>
+                    `<div class="history-item" onclick="buscarDoHistorico('${termo}')">${termo}</div>`
+                ).join('');
+            }
+        }
+
+        function buscarDoHistorico(termo) {
+            document.getElementById('termo').value = termo;
+            traduzir();
+        }
+
+        function copyToClipboard(button, elementId) {
+            const text = document.getElementById(elementId).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                button.textContent = '✅ Copiado!';
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.textContent = 'Copiar';
+                    button.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function compartilhar() {
+            const termo = document.getElementById('termo').value;
+            const traducao = document.getElementById('traducao').textContent;
+            
+            const texto = `🔍 Decifra - Tradução de "${termo}":\n\n${traducao}\n\n📱 Descubra mais em: Decifra`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Decifra - Tradutor de Jargão',
+                    text: texto,
+                    url: window.location.href
+                });
+            } else {
+                alert(texto);
+            }
+        }
+
+        function loadDemo() {
+            const demos = Object.keys(baseTermos);
+            const termoDemo = demos[Math.floor(Math.random() * demos.length)];
+            document.getElementById('termo').value = termoDemo;
+            traduzir();
+        }
+
+        // INICIALIZAR
+        atualizarHistorico();
+
+        // ENTER PARA TRADUZIR
+        document.getElementById('termo').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') traduzir();
+        });
+    </script>
+</body>
+</html>
