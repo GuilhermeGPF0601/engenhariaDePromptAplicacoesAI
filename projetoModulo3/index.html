@@ -317,9 +317,14 @@
             margin-top: 1rem;
         }
 
-        .btn-translate:hover {
+        .btn-translate:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
+        }
+
+        .btn-translate:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         /* OUTPUT SECTION */
@@ -534,6 +539,21 @@
             font-weight: 500;
         }
 
+        /* LOADING SPINNER */
+        .loading-spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(99, 102, 241, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--primary);
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         /* RESPONSIVE */
         @media (max-width: 768px) {
             .hero h1 {
@@ -570,19 +590,6 @@
             .step {
                 flex-wrap: wrap;
             }
-        }
-
-        /* DEMO BUTTON */
-        .demo-highlight {
-            background: #fef3c7;
-            padding: 0.3rem 0.6rem;
-            border-radius: 0.3rem;
-            font-weight: 600;
-        }
-
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
         }
     </style>
 </head>
@@ -622,7 +629,7 @@
                 <div class="feature-card">
                     <div class="feature-icon">✍️</div>
                     <h3>Digite o Termo</h3>
-                    <p>Escreva aquele jargão confuso que o professor falou. Ex: "Bottleneck", "Branch", "Brunoise"</p>
+                    <p>Escreva qualquer jargão confuso. Ex: "Bottleneck", "Brunoise", ou qualquer outra palavra!</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">🎓</div>
@@ -711,7 +718,7 @@
                 </div>
             </div>
 
-            <button class="btn btn-translate" onclick="traduzir()">✨ Decifra Esse Termo!</button>
+            <button class="btn btn-translate" id="botaoTraduzir" onclick="traduzir()">✨ Decifra Esse Termo!</button>
 
             <!-- OUTPUT -->
             <div id="outputSection" class="output-section">
@@ -767,7 +774,7 @@
     </footer>
 
     <script>
-        // BASE DE TERMOS
+        // BASE DE TERMOS LOCAIS (fallback)
         const baseTermos = {
             'bottleneck': {
                 area: 'Computação',
@@ -885,51 +892,127 @@
             }
         }
 
-        // TRADUZIR
-        function traduzir() {
+        // TRADUZIR COM IA (Usando backend)
+        async function traduzir() {
             const termo = document.getElementById('termo').value.toLowerCase().trim();
             const area = document.getElementById('area').value;
+            const contexto = document.getElementById('contexto').value;
 
             if (!termo) {
                 alert('Digite um termo primeiro! 📝');
                 return;
             }
 
-            const resultado = baseTermos[termo];
+            // Desabilitar botão enquanto processa
+            const botao = document.getElementById('botaoTraduzir');
+            const textoBotao = botao.textContent;
+            botao.disabled = true;
+            botao.innerHTML = '<span class="loading-spinner"></span> Traduzindo...';
 
-            if (!resultado) {
-                const termoDisponivel = Object.keys(baseTermos).join(', ');
-                alert(`Ué, "${termo}" ainda não tá no Decifra! 🤔\n\nMas temos esses: ${termoDisponivel}`);
-                return;
+            try {
+                // Primeiro, tenta no banco local
+                if (baseTermos[termo]) {
+                    const resultado = baseTermos[termo];
+                    
+                    if (area && resultado.area !== area) {
+                        document.getElementById('area').value = resultado.area;
+                    }
+
+                    preencherResultados(resultado);
+                } else {
+                    // Se não estiver no banco local, chama a IA
+                    const resultado = await traduzirComIA(termo, area, contexto);
+                    preencherResultados(resultado);
+                }
+
+                // ADICIONAR AO HISTÓRICO
+                if (!historico.includes(termo)) {
+                    historico.unshift(termo);
+                    if (historico.length > 10) historico.pop();
+                    localStorage.setItem('decifraHistorico', JSON.stringify(historico));
+                    atualizarHistorico();
+                }
+
+            } catch (erro) {
+                alert(`❌ Erro ao traduzir: ${erro.message}`);
+            } finally {
+                botao.disabled = false;
+                botao.textContent = textoBotao;
             }
+        }
 
-            if (area && resultado.area !== area) {
-                alert(`⚠️ "${termo}" é de ${resultado.area}, não de ${area}. Deixa eu ajustar...`);
-                document.getElementById('area').value = resultado.area;
+        async function traduzirComIA(termo, area, contexto) {
+            // Essa função chama um backend que você precisa criar
+            // Por enquanto, usa um prompt bem estruturado
+            
+            const prompt = `
+            Você é um tradutor de jargão acadêmico para português claro e simples.
+            
+            Termo: "${termo}"
+            ${area ? `Área: ${area}` : ''}
+            ${contexto ? `Contexto: ${contexto}` : ''}
+            
+            Responda em JSON com exatamente esta estrutura (sem markdown, apenas JSON):
+            {
+                "area": "A área acadêmica (Computação, Culinária, Economia ou Design)",
+                "traducao": "Explicação simples do termo em 1-2 frases, como um amigo explicando",
+                "exemplo": "Um exemplo prático e real do termo em uso, em 1-2 frases",
+                "passos": [
+                    { "emoji": "1️⃣", "texto": "Primeiro passo prático" },
+                    { "emoji": "2️⃣", "texto": "Segundo passo prático" },
+                    { "emoji": "3️⃣", "texto": "Terceiro passo prático" }
+                ]
             }
+            
+            Importante:
+            - Seja muito claro e simples, como explicando para um calouro/caloura
+            - Use analogias do dia a dia
+            - Os passos devem ser práticos e acionáveis
+            - Responda APENAS com o JSON, sem texto adicional
+            `;
 
-            // PREENCHER OUTPUTS
+            try {
+                // Tenta usar uma API local ou mock
+                const resposta = await fetch('/api/traduzir', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ termo, area, contexto, prompt })
+                });
+
+                if (!resposta.ok) {
+                    throw new Error('API não disponível');
+                }
+
+                const resultado = await resposta.json();
+                return resultado;
+
+            } catch (erro) {
+                // Fallback: retorna estrutura básica
+                console.warn('IA não disponível, usando fallback');
+                return {
+                    area: area || 'Geral',
+                    traducao: `"${termo}" é um termo técnico que significa algo importante nessa área. Você poderia pesquisar mais sobre ele nos seus materiais de estudo!`,
+                    exemplo: `Este termo é usado frequentemente em discussões sobre "${termo}".`,
+                    passos: [
+                        { emoji: '1️⃣', texto: 'Pesquise: Procure pela definição no seu livro ou na internet' },
+                        { emoji: '2️⃣', texto: 'Contextualize: Entenda em qual situação é usado' },
+                        { emoji: '3️⃣', texto: 'Pratique: Use em exemplos do seu dia a dia' }
+                    ]
+                };
+            }
+        }
+
+        function preencherResultados(resultado) {
             document.getElementById('traducao').textContent = resultado.traducao;
             document.getElementById('exemplo').textContent = resultado.exemplo;
 
-            // PREENCHER PASSOS
             const passosDiv = document.getElementById('passos');
             passosDiv.innerHTML = resultado.passos.map(passo => 
                 `<div class="step"><span class="step-number">${passo.emoji}</span><div class="step-text">${passo.texto}</div></div>`
             ).join('');
 
-            // MOSTRAR OUTPUT
             document.getElementById('outputSection').classList.add('active');
 
-            // ADICIONAR AO HISTÓRICO
-            if (!historico.includes(termo)) {
-                historico.unshift(termo);
-                if (historico.length > 10) historico.pop();
-                localStorage.setItem('decifraHistorico', JSON.stringify(historico));
-                atualizarHistorico();
-            }
-
-            // SCROLL
             setTimeout(() => {
                 document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
             }, 100);
