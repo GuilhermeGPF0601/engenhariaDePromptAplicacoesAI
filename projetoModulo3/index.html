@@ -774,7 +774,7 @@
     </footer>
 
     <script>
-        // BASE DE TERMOS LOCAIS (fallback)
+        // BASE DE TERMOS LOCAIS (fallback rápido para testes rápidos)
         const baseTermos = {
             'bottleneck': {
                 area: 'Computação',
@@ -804,36 +804,6 @@
                     { emoji: '1️⃣', texto: 'Limpe: retire as cascas e partes ruins' },
                     { emoji: '2️⃣', texto: 'Corte: use uma faca afiada em movimentos precisos' },
                     { emoji: '3️⃣', texto: 'Uniformize: mantenha o tamanho consistente!' }
-                ]
-            },
-            'iteração': {
-                area: 'Computação',
-                traducao: 'Repetir um processo várias vezes, cada vez melhorando um pouco. Como tentar várias vezes até acertar, aprendendo com cada tentativa.',
-                exemplo: 'Na programação, você roda o código, vê que não funcionou, corrige, roda de novo. Cada rodada é uma iteração. Você itera até ficar perfeito!',
-                passos: [
-                    { emoji: '1️⃣', texto: 'Execute: rode o código/processo' },
-                    { emoji: '2️⃣', texto: 'Analise: o que saiu errado?' },
-                    { emoji: '3️⃣', texto: 'Melhore: ajuste e repita!' }
-                ]
-            },
-            'commit': {
-                area: 'Computação',
-                traducao: 'Salvar uma "foto" do seu código em um momento específico. É como tirar um screenshot do seu trabalho com uma descrição do que você fez.',
-                exemplo: 'Você termina de consertar um bug, faz um commit dizendo "Corrigido o erro de login". Depois, se tudo quebrar, você consegue voltar pra esse snapshot!',
-                passos: [
-                    { emoji: '1️⃣', texto: 'Organize: stage as mudanças (git add)' },
-                    { emoji: '2️⃣', texto: 'Descreva: escreva uma mensagem clara' },
-                    { emoji: '3️⃣', texto: 'Confirme: git commit -m "sua mensagem"' }
-                ]
-            },
-            'pull request': {
-                area: 'Computação',
-                traducao: 'Um pedido pra "puxar" suas mudanças pro projeto principal. Tipo dizer "ó pessoal, eu fiz uma coisa legal aqui, alguém revisa pra gente juntar?"',
-                exemplo: 'Você terminou uma funcionalidade na sua branch, abre um PR. Seus colegas analisam, sugerem mudanças, você ajusta e pronto - merge!',
-                passos: [
-                    { emoji: '1️⃣', texto: 'Abra: crie um PR no GitHub/GitLab' },
-                    { emoji: '2️⃣', texto: 'Descreva: explique que mudanças fez' },
-                    { emoji: '3️⃣', texto: 'Espere: a galera revisa e aprova!' }
                 ]
             }
         };
@@ -892,7 +862,7 @@
             }
         }
 
-        // TRADUZIR COM IA (Usando backend)
+        // FUNÇÃO PRINCIPAL DE TRADUÇÃO
         async function traduzir() {
             const termo = document.getElementById('termo').value.toLowerCase().trim();
             const area = document.getElementById('area').value;
@@ -903,29 +873,29 @@
                 return;
             }
 
-            // Desabilitar botão enquanto processa
             const botao = document.getElementById('botaoTraduzir');
             const textoBotao = botao.textContent;
             botao.disabled = true;
-            botao.innerHTML = '<span class="loading-spinner"></span> Traduzindo...';
+            botao.innerHTML = '<span class="loading-spinner"></span> Decifrando...';
 
             try {
-                // Primeiro, tenta no banco local
+                let resultado;
+
+                // 1. Tenta buscar no banco local primeiro
                 if (baseTermos[termo]) {
-                    const resultado = baseTermos[termo];
-                    
+                    resultado = baseTermos[termo];
                     if (area && resultado.area !== area) {
                         document.getElementById('area').value = resultado.area;
                     }
-
-                    preencherResultados(resultado);
                 } else {
-                    // Se não estiver no banco local, chama a IA
-                    const resultado = await traduzirComIA(termo, area, contexto);
-                    preencherResultados(resultado);
+                    // 2. Se não existir localmente, chama a API da Inteligência Artificial
+                    resultado = await traduzirComIA(termo, area, contexto);
                 }
 
-                // ADICIONAR AO HISTÓRICO
+                // Renderiza os resultados na tela
+                preencherResultados(resultado);
+
+                // Adiciona ao histórico do navegador
                 if (!historico.includes(termo)) {
                     historico.unshift(termo);
                     if (historico.length > 10) historico.pop();
@@ -935,149 +905,151 @@
 
             } catch (erro) {
                 alert(`❌ Erro ao traduzir: ${erro.message}`);
+                console.error(erro);
             } finally {
                 botao.disabled = false;
                 botao.textContent = textoBotao;
             }
         }
 
+        // CONEXÃO COM A IA EXTERNA (GOOGLE GEMINI API)
         async function traduzirComIA(termo, area, contexto) {
-            // Essa função chama um backend que você precisa criar
-            // Por enquanto, usa um prompt bem estruturado
-            
+            // SUBSTITUA ESTA STRING PELA SUA CHAVE DE API REAL DO GEMINI
+            const API_KEY = "SUA_CHAVE_API_AQUI"; 
+            const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+
             const prompt = `
             Você é um tradutor de jargão acadêmico para português claro e simples.
+            Termo técnico a ser decifrado: "${termo}"
+            ${area ? `Área de estudo informada: ${area}` : ''}
+            ${contexto ? `Contexto fornecido pelo usuário: ${contexto}` : ''}
             
-            Termo: "${termo}"
-            ${area ? `Área: ${area}` : ''}
-            ${contexto ? `Contexto: ${contexto}` : ''}
-            
-            Responda em JSON com exatamente esta estrutura (sem markdown, apenas JSON):
+            Responda OBRIGATORIAMENTE em formato JSON válido, seguindo estritamente este modelo (não coloque cercados markdown \`\`\`json, mande apenas o texto limpo do JSON):
             {
-                "area": "A área acadêmica (Computação, Culinária, Economia ou Design)",
-                "traducao": "Explicação simples do termo em 1-2 frases, como um amigo explicando",
-                "exemplo": "Um exemplo prático e real do termo em uso, em 1-2 frases",
+                "area": "Defina a área real do termo caso ela não tenha sido enviada (Computação, Culinária, Economia ou Design)",
+                "traducao": "Explicação super simples e direta do termo em até 2 frases, como se fosse um amigo explicando de forma descontraída no WhatsApp.",
+                "exemplo": "Um exemplo prático e real do dia a dia aplicando o termo.",
                 "passos": [
-                    { "emoji": "1️⃣", "texto": "Primeiro passo prático" },
+                    { "emoji": "1️⃣", "texto": "Primeiro passo prático associado a esse conceito" },
                     { "emoji": "2️⃣", "texto": "Segundo passo prático" },
                     { "emoji": "3️⃣", "texto": "Terceiro passo prático" }
                 ]
             }
-            
-            Importante:
-            - Seja muito claro e simples, como explicando para um calouro/caloura
-            - Use analogias do dia a dia
-            - Os passos devem ser práticos e acionáveis
-            - Responda APENAS com o JSON, sem texto adicional
             `;
 
-            try {
-                // Tenta usar uma API local ou mock
-                const resposta = await fetch('/api/traduzir', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ termo, area, contexto, prompt })
-                });
+            const response = await fetch(URL, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: { responseMimeType: "application/json" }
+                })
+            });
 
-                if (!resposta.ok) {
-                    throw new Error('API não disponível');
-                }
-
-                const resultado = await resposta.json();
-                return resultado;
-
-            } catch (erro) {
-                // Fallback: retorna estrutura básica
-                console.warn('IA não disponível, usando fallback');
-                return {
-                    area: area || 'Geral',
-                    traducao: `"${termo}" é um termo técnico que significa algo importante nessa área. Você poderia pesquisar mais sobre ele nos seus materiais de estudo!`,
-                    exemplo: `Este termo é usado frequentemente em discussões sobre "${termo}".`,
-                    passos: [
-                        { emoji: '1️⃣', texto: 'Pesquise: Procure pela definição no seu livro ou na internet' },
-                        { emoji: '2️⃣', texto: 'Contextualize: Entenda em qual situação é usado' },
-                        { emoji: '3️⃣', texto: 'Pratique: Use em exemplos do seu dia a dia' }
-                    ]
-                };
+            if (!response.ok) {
+                throw new Error("Falha ao consultar a API. Verifique se colocou sua chave de API corretamente.");
             }
+
+            const data = await response.json();
+            let textoResposta = data.candidates[0].content.parts[0].text;
+            
+            // Limpeza extra de segurança para o JSON
+            textoResposta = textoResposta.replace(/```json|
+```/g, "").trim();
+
+            return JSON.parse(textoResposta);
         }
 
+        // RENDERIZA OS RESULTADOS NA TELA
         function preencherResultados(resultado) {
             document.getElementById('traducao').textContent = resultado.traducao;
             document.getElementById('exemplo').textContent = resultado.exemplo;
-
-            const passosDiv = document.getElementById('passos');
-            passosDiv.innerHTML = resultado.passos.map(passo => 
-                `<div class="step"><span class="step-number">${passo.emoji}</span><div class="step-text">${passo.texto}</div></div>`
-            ).join('');
-
-            document.getElementById('outputSection').classList.add('active');
-
-            setTimeout(() => {
-                document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+            
+            const passosContainer = document.getElementById('passos');
+            passosContainer.innerHTML = ''; // Limpa os passos da busca anterior
+            
+            resultado.passos.forEach(passo => {
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'step';
+                stepDiv.innerHTML = `
+                    <div class="step-number">${passo.emoji || '📍'}</div>
+                    <div class="step-text">${passo.texto}</div>
+                `;
+                passosContainer.appendChild(stepDiv);
+            });
+            
+            const outputSection = document.getElementById('outputSection');
+            outputSection.classList.add('active');
+            outputSection.style.display = 'grid';
+            
+            setTimeout(() => scrollToSection('outputSection'), 100);
         }
 
+        // ATUALIZAÇÃO VISUAL DO HISTÓRICO
         function atualizarHistorico() {
             const historySection = document.getElementById('historySection');
             const historyItems = document.getElementById('historyItems');
-
-            if (historico.length > 0) {
-                historySection.style.display = 'block';
-                historyItems.innerHTML = historico.map(termo =>
-                    `<div class="history-item" onclick="buscarDoHistorico('${termo}')">${termo}</div>`
-                ).join('');
+            
+            if (historico.length === 0) {
+                historySection.style.display = 'none';
+                return;
             }
+            
+            historySection.style.display = 'block';
+            historyItems.innerHTML = '';
+            
+            historico.forEach(termo => {
+                const item = document.createElement('div');
+                item.className = 'history-item';
+                item.textContent = termo;
+                item.onclick = () => {
+                    document.getElementById('termo').value = termo;
+                    traduzir();
+                };
+                historyItems.appendChild(item);
+            });
         }
 
-        function buscarDoHistorico(termo) {
-            document.getElementById('termo').value = termo;
-            traduzir();
-        }
-
-        function copyToClipboard(button, elementId) {
-            const text = document.getElementById(elementId).textContent;
-            navigator.clipboard.writeText(text).then(() => {
-                button.textContent = '✅ Copiado!';
-                button.classList.add('copied');
+        // COPIAR TEXTO PARA A ÁREA DE TRANSFERÊNCIA
+        function copyToClipboard(botao, elementoId) {
+            const texto = document.getElementById(elementoId).textContent;
+            navigator.clipboard.writeText(texto).then(() => {
+                const textoOriginal = botao.textContent;
+                botao.textContent = 'Copiado! ✓';
+                botao.classList.add('copied');
                 setTimeout(() => {
-                    button.textContent = 'Copiar';
-                    button.classList.remove('copied');
+                    botao.textContent = textoOriginal;
+                    botao.classList.remove('copied');
                 }, 2000);
             });
         }
 
+        // COMPARTILHAR RESULTADOS (API nativa de compartilhamento Mobile)
         function compartilhar() {
             const termo = document.getElementById('termo').value;
             const traducao = document.getElementById('traducao').textContent;
             
-            const texto = `🔍 Decifra - Tradução de "${termo}":\n\n${traducao}\n\n📱 Descubra mais em: Decifra`;
-            
             if (navigator.share) {
                 navigator.share({
-                    title: 'Decifra - Tradutor de Jargão',
-                    text: texto,
+                    title: `Decifra - ${termo}`,
+                    text: `Olha o que significa "${termo}": ${traducao}`,
                     url: window.location.href
-                });
+                }).catch(console.error);
             } else {
-                alert(texto);
+                alert('A API de compartilhamento não é suportada por esse navegador. Mas você pode copiar os cards de texto!');
             }
         }
 
+        // RODA O EXEMPLO DO BOTÃO "VER DEMO"
         function loadDemo() {
-            const demos = Object.keys(baseTermos);
-            const termoDemo = demos[Math.floor(Math.random() * demos.length)];
-            document.getElementById('termo').value = termoDemo;
+            document.getElementById('termo').value = 'Bottleneck';
+            document.getElementById('area').value = 'Computação';
+            document.getElementById('contexto').value = '';
             traduzir();
         }
 
-        // INICIALIZAR
-        atualizarHistorico();
-
-        // ENTER PARA TRADUZIR
-        document.getElementById('termo').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') traduzir();
-        });
+        // Carrega o histórico local quando a página abrir
+        window.onload = atualizarHistorico;
     </script>
 </body>
 </html>
