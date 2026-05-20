@@ -1,1055 +1,692 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🔍 Decifra - Tradutor de Jargão Acadêmico</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4f46e5;
-            --secondary: #f97316;
-            --success: #10b981;
-            --bg: #f8fafc;
-            --text: #1e293b;
-            --text-light: #64748b;
-            --border: #e2e8f0;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        /* HEADER */
-        header {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 1rem 2rem;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow);
-        }
-
-        .header-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        /* HERO */
-        .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #8b5cf6 100%);
-            color: white;
-            padding: 4rem 2rem;
-            text-align: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: slideDown 0.6s ease-out;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.95;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 0.8rem 1.8rem;
-            border: none;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-        }
-
-        .btn-primary {
-            background: white;
-            color: var(--primary);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: 2px solid white;
-        }
-
-        .btn-secondary:hover {
-            background: white;
-            color: var(--primary);
-        }
-
-        /* MAIN CONTAINER */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* FEATURES SECTION */
-        .features {
-            padding: 3rem 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 2rem;
-            color: var(--text);
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .feature-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 1rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--primary);
-        }
-
-        .feature-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            color: var(--primary);
-            margin-bottom: 0.8rem;
-        }
-
-        .feature-card p {
-            color: var(--text-light);
-        }
-
-        /* AREAS SUPPORTED */
-        .areas {
-            padding: 3rem 2rem;
-            background: white;
-        }
-
-        .areas-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .area-badge {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 0.8rem;
-            text-align: center;
-            font-weight: 600;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-
-        .area-badge:hover {
-            transform: scale(1.05);
-        }
-
-        /* TRANSLATOR SECTION */
-        .translator {
-            padding: 3rem 2rem;
-            background: white;
-            margin: 2rem 0;
-            border-radius: 1rem;
-            box-shadow: var(--shadow);
-        }
-
-        .translator h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-
-        .input-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            padding: 0.8rem;
-            border: 2px solid var(--border);
-            border-radius: 0.5rem;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .upload-zone {
-            border: 2px dashed var(--border);
-            border-radius: 0.8rem;
-            padding: 2rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            background: rgba(99, 102, 241, 0.02);
-        }
-
-        .upload-zone:hover {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.05);
-        }
-
-        .upload-zone.dragover {
-            border-color: var(--primary);
-            background: rgba(99, 102, 241, 0.1);
-        }
-
-        #fotoUpload {
-            display: none;
-        }
-
-        .file-preview {
-            margin-top: 1rem;
-            max-width: 150px;
-            border-radius: 0.5rem;
-        }
-
-        .btn-translate {
-            width: 100%;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: white;
-            padding: 1rem;
-            font-size: 1.1rem;
-            margin-top: 1rem;
-        }
-
-        .btn-translate:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn-translate:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        /* OUTPUT SECTION */
-        .output-section {
-            display: none;
-            margin-top: 2rem;
-            animation: fadeIn 0.5s ease-out;
-        }
-
-        .output-section.active {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-        }
-
-        .output-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 0.8rem;
-            border: 2px solid var(--border);
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .output-card:hover {
-            box-shadow: var(--shadow);
-            border-color: var(--primary);
-        }
-
-        .output-card h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .output-card p {
-            color: var(--text);
-            margin-bottom: 1rem;
-            line-height: 1.8;
-            word-break: break-word;
-        }
-
-        .output-text {
-            color: var(--text);
-            line-height: 1.8;
-            padding: 0.5rem 0;
-            word-break: break-word;
-        }
-
-        .steps {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .step {
-            background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, rgba(249, 115, 22, 0.05) 100%);
-            padding: 1.2rem;
-            border-radius: 0.5rem;
-            border-left: 4px solid var(--secondary);
-            display: flex;
-            gap: 1rem;
-        }
-
-        .step-number {
-            font-weight: bold;
-            font-size: 1.5rem;
-            flex-shrink: 0;
-            min-width: 2rem;
-        }
-
-        .step-text {
-            color: var(--text);
-            font-weight: 500;
-        }
-
-        .copy-btn {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 0.4rem;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-        }
-
-        .copy-btn:hover {
-            background: var(--primary-dark);
-            transform: scale(1.05);
-        }
-
-        .copy-btn.copied {
-            background: var(--success);
-        }
-
-        /* HISTORY */
-        .history-section {
-            margin-top: 2rem;
-            background: rgba(99, 102, 241, 0.05);
-            padding: 1.5rem;
-            border-radius: 0.8rem;
-            border: 2px solid var(--border);
-        }
-
-        .history-title {
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .history-items {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        .history-item {
-            background: white;
-            padding: 0.6rem 1rem;
-            border-radius: 2rem;
-            cursor: pointer;
-            border: 2px solid var(--border);
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .history-item:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            font-weight: 600;
-            background: rgba(99, 102, 241, 0.05);
-        }
-
-        /* FOOTER */
-        footer {
-            background: var(--text);
-            color: white;
-            padding: 2rem;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .footer-content p {
-            margin: 0.5rem 0;
-            opacity: 0.9;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-
-        .footer-links a:hover {
-            opacity: 0.7;
-        }
-
-        /* ANIMATIONS */
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* SUCCESS MESSAGE */
-        .success-message {
-            background: rgba(16, 185, 129, 0.1);
-            border-left: 4px solid var(--success);
-            padding: 1rem;
-            border-radius: 0.5rem;
-            margin-top: 1rem;
-            animation: slideDown 0.3s ease-out;
-        }
-
-        .success-message p {
-            color: var(--success);
-            font-weight: 500;
-        }
-
-        /* LOADING SPINNER */
-        .loading-spinner {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(99, 102, 241, 0.2);
-            border-radius: 50%;
-            border-top-color: var(--primary);
-            animation: spin 0.8s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                font-size: 0.9rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .input-section {
-                grid-template-columns: 1fr;
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .copy-btn {
-                position: static;
-                width: 100%;
-                margin-top: 1rem;
-            }
-
-            .step {
-                flex-wrap: wrap;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Currículo Gov</title>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    body{
+      font-family:'Inter',sans-serif;
+      background:#eef2f7;
+      overflow:hidden;
+      color:#0f172a;
+    }
+
+    .gov-bar{
+      height:6px;
+      background:
+      linear-gradient(
+        to right,
+        #168821 0%,
+        #168821 33.3%,
+        #ffcd00 33.3%,
+        #ffcd00 66.6%,
+        #001f5b 66.6%,
+        #001f5b 100%
+      );
+    }
+
+    .sidebar-scroll{
+      scrollbar-width:thin;
+    }
+
+    .sidebar-scroll::-webkit-scrollbar{
+      width:6px;
+    }
+
+    .sidebar-scroll::-webkit-scrollbar-thumb{
+      background:#cbd5e1;
+      border-radius:999px;
+    }
+
+    /* CAMPOS */
+
+    .field{
+      width:100%;
+      border:1px solid #d1d5db;
+      border-radius:14px;
+      background:white;
+      padding:14px;
+      transition:0.2s;
+      font-size:14px;
+      resize:none;
+      color:#0f172a;
+    }
+
+    .field:focus{
+      outline:none;
+      border-color:#0038a8;
+      box-shadow:0 0 0 4px rgba(0,56,168,0.12);
+    }
+
+    .label{
+      display:block;
+      font-size:13px;
+      font-weight:700;
+      color:#334155;
+      margin-bottom:7px;
+    }
+
+    .group-card{
+      background:white;
+      border-radius:20px;
+      padding:22px;
+      border:1px solid #e2e8f0;
+      box-shadow:0 2px 10px rgba(0,0,0,0.04);
+    }
+
+    /* CURRÍCULO */
+
+    .a4{
+
+      width:210mm;
+
+      min-height:297mm;
+
+      background:white;
+
+      margin:auto;
+
+      padding:20mm 18mm;
+
+      box-shadow:0 10px 40px rgba(0,0,0,0.10);
+
+      box-sizing:border-box;
+
+    }
+
+    .gov-header{
+      border-left:6px solid #001f5b;
+      padding-left:18px;
+      margin-bottom:42px;
+    }
+
+    .section-title{
+      font-size:15px;
+      font-weight:800;
+      color:#001f5b;
+      margin-bottom:12px;
+      padding-bottom:8px;
+      border-bottom:2px solid #dbe4ff;
+      text-transform:uppercase;
+      letter-spacing:0.5px;
+    }
+
+    .cv-section{
+      margin-bottom:28px;
+      page-break-inside:avoid;
+      break-inside:avoid;
+    }
+
+    .preview-text{
+      white-space:pre-line;
+      word-break:break-word;
+      overflow-wrap:break-word;
+      line-height:1.8;
+      color:#334155;
+    }
+
+    /* RESPONSIVO */
+
+    @media(max-width:1200px){
+
+      body{
+        overflow:auto;
+      }
+
+      .a4{
+        width:100%;
+        min-height:auto;
+      }
+
+    }
+
+    /* PRINT */
+
+    @media print{
+
+      body{
+        background:white;
+      }
+
+      .no-print{
+        display:none !important;
+      }
+
+      .a4{
+        box-shadow:none;
+      }
+
+    }
+
+  </style>
+
 </head>
+
 <body>
-    <!-- HEADER -->
-    <header>
-        <div class="header-container">
-            <div class="logo">🔍 Decifra</div>
-            <nav>
-                <ul class="nav-links">
-                    <li><a onclick="scrollToSection('features')">Como Funciona</a></li>
-                    <li><a onclick="scrollToSection('translator')">Tradutor</a></li>
-                    <li><a onclick="scrollToSection('areas')">Áreas</a></li>
-                </ul>
-            </nav>
+
+  <!-- BARRA GOV -->
+  <div class="gov-bar"></div>
+
+  <div class="flex h-[calc(100vh-6px)] overflow-hidden">
+
+    <!-- SIDEBAR -->
+    <aside
+      class="w-[420px] min-w-[420px] bg-[#f8fafc] border-r border-slate-200 flex flex-col no-print">
+
+      <!-- HEADER -->
+      <div class="bg-[#001f5b] text-white px-8 py-7 shadow-lg">
+
+        <div class="flex items-center justify-between">
+
+          <div>
+
+            <h1 class="text-2xl font-extrabold tracking-tight">
+              Currículo Gov
+            </h1>
+
+            <p class="text-blue-100 text-sm mt-1">
+              Design Sprint Brasileiro
+            </p>
+
+          </div>
+
+          <div class="bg-white/10 rounded-xl p-3">
+
+            <svg xmlns="http://www.w3.org/2000/svg"
+              class="h-7 w-7"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor">
+
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+
+            </svg>
+
+          </div>
+
         </div>
-    </header>
 
-    <!-- HERO -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>🎓 Decifra</h1>
-            <p>Perdido no jargão técnico? Traduzimos o complicado em simples!</p>
-            <p style="font-size: 0.95rem; opacity: 0.9;">Para calouros e calouras que querem entender tudo na hora</p>
-            <div class="cta-buttons">
-                <button class="btn btn-primary" onclick="scrollToSection('translator')">Começar Agora</button>
-                <button class="btn btn-secondary" onclick="loadDemo()">👀 Ver Demo</button>
+      </div>
+
+      <!-- FORM -->
+      <div class="flex-1 overflow-y-auto sidebar-scroll p-6 space-y-5">
+
+        <!-- DADOS -->
+        <div class="group-card">
+
+          <div class="flex items-center gap-3 mb-5">
+
+            <div class="bg-blue-100 text-blue-900 p-2 rounded-xl">
+              👤
             </div>
+
+            <div>
+
+              <h2 class="font-bold text-slate-800">
+                Dados Pessoais
+              </h2>
+
+              <p class="text-sm text-slate-500">
+                Informações principais
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="space-y-4">
+
+            <div>
+
+              <label class="label">
+                Nome Completo
+              </label>
+
+              <input
+                id="name"
+                class="field"
+                maxlength="45"
+                placeholder="Digite seu nome completo">
+
+            </div>
+
+            <div>
+
+              <label class="label">
+                Cargo Desejado
+              </label>
+
+              <input
+                id="role"
+                class="field"
+                maxlength="55"
+                placeholder="Ex: Assistente Administrativo">
+
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+
+              <div>
+
+                <label class="label">
+                  Cidade
+                </label>
+
+                <input
+                  id="location"
+                  class="field"
+                  maxlength="30"
+                  placeholder="Brasília - DF">
+
+              </div>
+
+              <div>
+
+                <label class="label">
+                  Telefone
+                </label>
+
+                <input
+                  id="phone"
+                  class="field"
+                  maxlength="20"
+                  placeholder="(61) 99999-9999">
+
+              </div>
+
+            </div>
+
+            <div>
+
+              <label class="label">
+                E-mail
+              </label>
+
+              <input
+                id="email"
+                class="field"
+                maxlength="45"
+                placeholder="email@email.com">
+
+            </div>
+
+          </div>
+
         </div>
-    </section>
 
-    <!-- FEATURES -->
-    <section id="features" class="features">
-        <div class="container">
-            <h2 class="section-title">Como Funciona? 🧠</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">✍️</div>
-                    <h3>Digite o Termo</h3>
-                    <p>Escreva qualquer jargão confuso. Ex: "Bottleneck", "Brunoise", ou qualquer outra palavra!</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎓</div>
-                    <h3>Escolha a Área</h3>
-                    <p>Selecione se é de Computação, Culinária, Economia ou Design para contexto certo</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📸</div>
-                    <h3>Envie Foto (Opcional)</h3>
-                    <p>Tira foto da página do livro ou slide? Manda pra gente entender melhor o contexto!</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Tradução Simples</h3>
-                    <p>Recebe uma explicação clara como se fosse um amigo explicando no WhatsApp</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💡</div>
-                    <h3>Exemplo Prático</h3>
-                    <p>Uma analogia ou exemplo real que faz o conceito clicar na sua cabeça</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📋</div>
-                    <h3>Passo-a-Passo Claro</h3>
-                    <p>3 passos práticos e simples pra entender e usar aquilo agora mesmo</p>
-                </div>
+        <!-- PERFIL -->
+        <div class="group-card">
+
+          <div class="flex items-center gap-3 mb-5">
+
+            <div class="bg-green-100 text-green-900 p-2 rounded-xl">
+              📝
             </div>
+
+            <div>
+
+              <h2 class="font-bold text-slate-800">
+                Perfil Profissional
+              </h2>
+
+              <p class="text-sm text-slate-500">
+                Resumo profissional
+              </p>
+
+            </div>
+
+          </div>
+
+          <textarea
+            id="summary"
+            rows="6"
+            maxlength="700"
+            class="field"
+            placeholder="Descreva seu perfil profissional, competências e objetivos."></textarea>
+
         </div>
-    </section>
 
-    <!-- AREAS SUPPORTED -->
-    <section id="areas" class="areas">
-        <div class="container">
-            <h2 class="section-title">Áreas de Estudo 🏆</h2>
-            <div class="areas-grid">
-                <div class="area-badge" onclick="selectArea('Computação')">
-                    💻 Computação
-                </div>
-                <div class="area-badge" onclick="selectArea('Culinária')">
-                    👨‍🍳 Culinária
-                </div>
-                <div class="area-badge" onclick="selectArea('Economia')">
-                    📊 Economia
-                </div>
-                <div class="area-badge" onclick="selectArea('Design')">
-                    🎨 Design
-                </div>
+        <!-- EXPERIÊNCIA -->
+        <div class="group-card">
+
+          <div class="flex items-center gap-3 mb-5">
+
+            <div class="bg-yellow-100 text-yellow-900 p-2 rounded-xl">
+              💼
             </div>
+
+            <div>
+
+              <h2 class="font-bold text-slate-800">
+                Experiência
+              </h2>
+
+              <p class="text-sm text-slate-500">
+                Histórico profissional
+              </p>
+
+            </div>
+
+          </div>
+
+          <textarea
+            id="experience"
+            rows="7"
+            maxlength="1200"
+            class="field"
+            placeholder="Empresa - Cargo&#10;Período&#10;Atividades realizadas"></textarea>
+
         </div>
-    </section>
 
-    <!-- TRANSLATOR -->
-    <section id="translator" class="container">
-        <div class="translator">
-            <h2>🔄 Tradutor de Jargão</h2>
-            
-            <div class="input-section">
-                <div class="form-group" style="grid-column: 1 / -1;">
-                    <label for="termo">📝 Qual é o termo complicado?</label>
-                    <input type="text" id="termo" placeholder="Ex: Bottleneck, Brunoise, Branch..." value="">
-                </div>
+        <!-- FORMAÇÃO -->
+        <div class="group-card">
 
-                <div class="form-group">
-                    <label for="area">🎓 Área de Estudo</label>
-                    <select id="area">
-                        <option value="">-- Escolha uma área --</option>
-                        <option value="Computação">💻 Computação</option>
-                        <option value="Culinária">👨‍🍳 Culinária</option>
-                        <option value="Economia">📊 Economia</option>
-                        <option value="Design">🎨 Design</option>
-                    </select>
-                </div>
+          <div class="flex items-center gap-3 mb-5">
 
-                <div class="form-group">
-                    <label for="contexto">💭 Contexto (Opcional)</label>
-                    <textarea id="contexto" placeholder="Ex: Apareceu num slide sobre otimização..."></textarea>
-                </div>
-
-                <div class="form-group" style="grid-column: 1 / -1;">
-                    <label for="fotoUpload">📸 Envie uma Foto (Opcional)</label>
-                    <div class="upload-zone" id="uploadZone">
-                        <p>📁 Arraste a foto aqui ou clique para selecionar</p>
-                        <input type="file" id="fotoUpload" accept="image/*">
-                        <img id="filePreview" class="file-preview" style="display: none;">
-                    </div>
-                </div>
+            <div class="bg-purple-100 text-purple-900 p-2 rounded-xl">
+              🎓
             </div>
 
-            <button class="btn btn-translate" id="botaoTraduzir" onclick="traduzir()">✨ Decifra Esse Termo!</button>
+            <div>
 
-            <!-- OUTPUT -->
-            <div id="outputSection" class="output-section">
-                <!-- Tradução Sem Frescura -->
-                <div class="output-card">
-                    <h3>🎯 Tradução Sem Frescura</h3>
-                    <button class="copy-btn" onclick="copyToClipboard(this, 'traducao')">Copiar</button>
-                    <div id="traducao" class="output-text"></div>
-                </div>
+              <h2 class="font-bold text-slate-800">
+                Formação
+              </h2>
 
-                <!-- Exemplo Prático -->
-                <div class="output-card">
-                    <h3>💡 Exemplo Prático</h3>
-                    <button class="copy-btn" onclick="copyToClipboard(this, 'exemplo')">Copiar</button>
-                    <div id="exemplo" class="output-text"></div>
-                </div>
+              <p class="text-sm text-slate-500">
+                Formação acadêmica
+              </p>
 
-                <!-- Passo a Passo -->
-                <div class="output-card">
-                    <h3>📍 Passo a Passo</h3>
-                    <div class="steps" id="passos"></div>
-                </div>
-
-                <!-- Compartilhar -->
-                <div class="output-card">
-                    <h3>📤 Compartilhar</h3>
-                    <button class="btn btn-primary" onclick="compartilhar()" style="width: 100%;">
-                        Compartilhar Resultado
-                    </button>
-                </div>
             </div>
 
-            <!-- HISTÓRICO -->
-            <div id="historySection" class="history-section" style="display: none;">
-                <div class="history-title">📚 Histórico de Buscas</div>
-                <div class="history-items" id="historyItems"></div>
-            </div>
+          </div>
+
+          <textarea
+            id="education"
+            rows="5"
+            maxlength="700"
+            class="field"
+            placeholder="Curso - Instituição&#10;Ano"></textarea>
+
         </div>
-    </section>
 
-    <!-- FOOTER -->
-    <footer>
-        <div class="footer-content">
-            <p><strong>🔍 Decifra</strong> - Seu Tradutor de Jargão Acadêmico</p>
-            <p>Feito para calouros e calouras que querem entender tudo na primeira vez</p>
-            <div class="footer-links">
-                <a href="#features">Como Funciona</a>
-                <a href="#translator">Tradutor</a>
-                <a href="#areas">Áreas</a>
+        <!-- HABILIDADES -->
+        <div class="group-card">
+
+          <div class="flex items-center gap-3 mb-5">
+
+            <div class="bg-red-100 text-red-900 p-2 rounded-xl">
+              ⚡
             </div>
-            <p style="margin-top: 1.5rem; opacity: 0.7; font-size: 0.9rem;">© 2026 Decifra - Design Sprint do Governo | UDF</p>
+
+            <div>
+
+              <h2 class="font-bold text-slate-800">
+                Habilidades
+              </h2>
+
+              <p class="text-sm text-slate-500">
+                Competências e ferramentas
+              </p>
+
+            </div>
+
+          </div>
+
+          <textarea
+            id="skills"
+            rows="5"
+            maxlength="500"
+            class="field"
+            placeholder="Pacote Office&#10;Comunicação&#10;Organização"></textarea>
+
         </div>
-    </footer>
 
-    <script>
-        // BASE DE TERMOS LOCAIS (fallback rápido para testes rápidos)
-        const baseTermos = {
-            'bottleneck': {
-                area: 'Computação',
-                traducao: 'Um ponto onde tudo fica lento. Tipo quando você quer ir pra casa mas tem um único portão no estacionamento... todo mundo passa por ali e vira caos!',
-                exemplo: 'Se seu servidor aguenta 1000 requisições por segundo mas o banco de dados só consegue processar 100, ali é seu bottleneck.',
-                passos: [
-                    { emoji: '1️⃣', texto: 'Identifique: Onde o sistema fica mais lento?' },
-                    { emoji: '2️⃣', texto: 'Analise: Qual componente é o culpado?' },
-                    { emoji: '3️⃣', texto: 'Otimize: Melhore esse componente específico!' }
-                ]
-            },
-            'branch': {
-                area: 'Computação',
-                traducao: 'Uma "cópia paralela" do seu projeto. Você pode mexer nela sem destruir o projeto original. Tipo copiar um arquivo pra mexer e deixar o original intacto.',
-                exemplo: 'Você tá trabalhando numa funcionalidade nova enquanto seu colega corrige um bug. Vocês tão em branches diferentes! Depois juntam tudo.',
-                passos: [
-                    { emoji: '1️⃣', texto: 'Crie: git checkout -b minha-branch' },
-                    { emoji: '2️⃣', texto: 'Trabalhe: faça suas mudanças normalmente' },
-                    { emoji: '3️⃣', texto: 'Junta: faça um pull request pra main' }
-                ]
-            },
-            'brunoise': {
-                area: 'Culinária',
-                traducao: 'Cortar algo bem pequenininho em cubinhos bem uniformes. Tipo picar uma cebola em quadradinhos de 3mm. Fica bonito e cozinha tudo igual.',
-                exemplo: 'Quando você vê aquela cenoura em cubinhos minúsculos em uma receita gourmet, aquilo é brunoise! Parece sem importância mas afeta como o prato fica.',
-                passos: [
-                    { emoji: '1️⃣', texto: 'Limpe: retire as cascas e partes ruins' },
-                    { emoji: '2️⃣', texto: 'Corte: use uma faca afiada em movimentos precisos' },
-                    { emoji: '3️⃣', texto: 'Uniformize: mantenha o tamanho consistente!' }
-                ]
-            }
-        };
+        <!-- BOTÃO -->
+        <button
+          id="downloadBtn"
+          class="w-full bg-[#001f5b] hover:bg-[#002d86] text-white font-bold py-4 rounded-2xl transition-all shadow-lg">
 
-        let historico = JSON.parse(localStorage.getItem('decifraHistorico')) || [];
+          Exportar PDF
 
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
+        </button>
+
+      </div>
+
+    </aside>
+
+    <!-- PREVIEW -->
+    <main class="flex-1 overflow-auto p-10">
+
+      <div id="curriculo" class="a4">
+
+        <!-- HEADER -->
+        <div class="gov-header">
+
+          <h1
+            id="preview-name"
+            class="text-4xl font-extrabold text-slate-900 break-words">
+
+            Seu Nome
+
+          </h1>
+
+          <p
+            id="preview-role"
+            class="text-xl text-[#0038a8] font-semibold mt-2 break-words">
+
+            Cargo Desejado
+
+          </p>
+
+          <div class="flex flex-wrap gap-5 mt-5 text-sm text-slate-600">
+
+            <span id="preview-location">
+              Brasília - DF
+            </span>
+
+            <span id="preview-phone">
+              (61) 99999-9999
+            </span>
+
+            <span id="preview-email">
+              email@email.com
+            </span>
+
+          </div>
+
+        </div>
+
+        <!-- PERFIL -->
+        <section class="cv-section">
+
+          <h2 class="section-title">
+            Perfil Profissional
+          </h2>
+
+          <p
+            id="preview-summary"
+            class="preview-text">
+
+            Seu resumo profissional aparecerá aqui.
+
+          </p>
+
+        </section>
+
+        <!-- EXPERIÊNCIA -->
+        <section class="cv-section">
+
+          <h2 class="section-title">
+            Experiência Profissional
+          </h2>
+
+          <p
+            id="preview-experience"
+            class="preview-text">
+
+            Suas experiências aparecerão aqui.
+
+          </p>
+
+        </section>
+
+        <!-- FORMAÇÃO -->
+        <section class="cv-section">
+
+          <h2 class="section-title">
+            Formação Acadêmica
+          </h2>
+
+          <p
+            id="preview-education"
+            class="preview-text">
+
+            Sua formação aparecerá aqui.
+
+          </p>
+
+        </section>
+
+        <!-- HABILIDADES -->
+        <section class="cv-section">
+
+          <h2 class="section-title">
+            Habilidades
+          </h2>
+
+          <p
+            id="preview-skills"
+            class="preview-text">
+
+            Suas habilidades aparecerão aqui.
+
+          </p>
+
+        </section>
+
+      </div>
+
+    </main>
+
+  </div>
+
+  <script>
+
+    // CAMPOS
+    const fields = [
+      "name",
+      "role",
+      "location",
+      "phone",
+      "email",
+      "summary",
+      "experience",
+      "education",
+      "skills"
+    ];
+
+    // ATUALIZAÇÃO
+    fields.forEach(field => {
+
+      const input = document.getElementById(field);
+      const preview = document.getElementById(`preview-${field}`);
+
+      input.addEventListener("input", () => {
+
+        let value = input.value.replace(/\s{3,}/g, ' ');
+
+        input.value = value;
+
+        preview.textContent =
+          value || input.placeholder || "";
+
+      });
+
+    });
+
+    // EXPORTAR PDF
+    document.getElementById("downloadBtn")
+    .addEventListener("click", async () => {
+
+      const element = document.getElementById("curriculo");
+
+      const opt = {
+
+        margin:[10,10,10,10],
+
+        filename:'curriculo-profissional.pdf',
+
+        image:{
+          type:'jpeg',
+          quality:1
+        },
+
+        html2canvas:{
+
+          scale:4,
+
+          useCORS:true,
+
+          scrollY:0
+
+        },
+
+        jsPDF:{
+
+          unit:'mm',
+
+          format:'a4',
+
+          orientation:'portrait'
+
+        },
+
+        pagebreak:{
+
+          mode:['avoid-all','css','legacy']
+
         }
 
-        function selectArea(area) {
-            document.getElementById('area').value = area;
-            scrollToSection('translator');
-        }
+      };
 
-        // UPLOAD DE FOTO
-        const uploadZone = document.getElementById('uploadZone');
-        const fileInput = document.getElementById('fotoUpload');
-        const filePreview = document.getElementById('filePreview');
+      await html2pdf()
+      .set(opt)
+      .from(element)
+      .save();
 
-        uploadZone.addEventListener('click', () => fileInput.click());
+    });
 
-        uploadZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadZone.classList.add('dragover');
-        });
+  </script>
 
-        uploadZone.addEventListener('dragleave', () => {
-            uploadZone.classList.remove('dragover');
-        });
-
-        uploadZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadZone.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            if (files.length > 0) {
-                fileInput.files = files;
-                mostrarPreview();
-            }
-        });
-
-        fileInput.addEventListener('change', mostrarPreview);
-
-        function mostrarPreview() {
-            const file = fileInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    filePreview.src = e.target.result;
-                    filePreview.style.display = 'block';
-                };
-                reader.readAsDataURL(file);
-            }
-        }
-
-        // FUNÇÃO PRINCIPAL DE TRADUÇÃO
-        async function traduzir() {
-            const termo = document.getElementById('termo').value.toLowerCase().trim();
-            const area = document.getElementById('area').value;
-            const contexto = document.getElementById('contexto').value;
-
-            if (!termo) {
-                alert('Digite um termo primeiro! 📝');
-                return;
-            }
-
-            const botao = document.getElementById('botaoTraduzir');
-            const textoBotao = botao.textContent;
-            botao.disabled = true;
-            botao.innerHTML = '<span class="loading-spinner"></span> Decifrando...';
-
-            try {
-                let resultado;
-
-                // 1. Tenta buscar no banco local primeiro
-                if (baseTermos[termo]) {
-                    resultado = baseTermos[termo];
-                    if (area && resultado.area !== area) {
-                        document.getElementById('area').value = resultado.area;
-                    }
-                } else {
-                    // 2. Se não existir localmente, chama a API da Inteligência Artificial
-                    resultado = await traduzirComIA(termo, area, contexto);
-                }
-
-                // Renderiza os resultados na tela
-                preencherResultados(resultado);
-
-                // Adiciona ao histórico do navegador
-                if (!historico.includes(termo)) {
-                    historico.unshift(termo);
-                    if (historico.length > 10) historico.pop();
-                    localStorage.setItem('decifraHistorico', JSON.stringify(historico));
-                    atualizarHistorico();
-                }
-
-            } catch (erro) {
-                alert(`❌ Erro ao traduzir: ${erro.message}`);
-                console.error(erro);
-            } finally {
-                botao.disabled = false;
-                botao.textContent = textoBotao;
-            }
-        }
-
-        // CONEXÃO COM A IA EXTERNA (GOOGLE GEMINI API)
-        async function traduzirComIA(termo, area, contexto) {
-            // SUBSTITUA ESTA STRING PELA SUA CHAVE DE API REAL DO GEMINI
-            const API_KEY = "SUA_CHAVE_API_AQUI"; 
-            const URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
-
-            const prompt = `
-            Você é um tradutor de jargão acadêmico para português claro e simples.
-            Termo técnico a ser decifrado: "${termo}"
-            ${area ? `Área de estudo informada: ${area}` : ''}
-            ${contexto ? `Contexto fornecido pelo usuário: ${contexto}` : ''}
-            
-            Responda OBRIGATORIAMENTE em formato JSON válido, seguindo estritamente este modelo (não coloque cercados markdown \`\`\`json, mande apenas o texto limpo do JSON):
-            {
-                "area": "Defina a área real do termo caso ela não tenha sido enviada (Computação, Culinária, Economia ou Design)",
-                "traducao": "Explicação super simples e direta do termo em até 2 frases, como se fosse um amigo explicando de forma descontraída no WhatsApp.",
-                "exemplo": "Um exemplo prático e real do dia a dia aplicando o termo.",
-                "passos": [
-                    { "emoji": "1️⃣", "texto": "Primeiro passo prático associado a esse conceito" },
-                    { "emoji": "2️⃣", "texto": "Segundo passo prático" },
-                    { "emoji": "3️⃣", "texto": "Terceiro passo prático" }
-                ]
-            }
-            `;
-
-            const response = await fetch(URL, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    contents: [{ parts: [{ text: prompt }] }],
-                    generationConfig: { responseMimeType: "application/json" }
-                })
-            });
-
-            if (!response.ok) {
-                throw new Error("Falha ao consultar a API. Verifique se colocou sua chave de API corretamente.");
-            }
-
-            const data = await response.json();
-            let textoResposta = data.candidates[0].content.parts[0].text;
-            
-            // Limpeza extra de segurança para o JSON
-            textoResposta = textoResposta.replace(/```json|
-```/g, "").trim();
-
-            return JSON.parse(textoResposta);
-        }
-
-        // RENDERIZA OS RESULTADOS NA TELA
-        function preencherResultados(resultado) {
-            document.getElementById('traducao').textContent = resultado.traducao;
-            document.getElementById('exemplo').textContent = resultado.exemplo;
-            
-            const passosContainer = document.getElementById('passos');
-            passosContainer.innerHTML = ''; // Limpa os passos da busca anterior
-            
-            resultado.passos.forEach(passo => {
-                const stepDiv = document.createElement('div');
-                stepDiv.className = 'step';
-                stepDiv.innerHTML = `
-                    <div class="step-number">${passo.emoji || '📍'}</div>
-                    <div class="step-text">${passo.texto}</div>
-                `;
-                passosContainer.appendChild(stepDiv);
-            });
-            
-            const outputSection = document.getElementById('outputSection');
-            outputSection.classList.add('active');
-            outputSection.style.display = 'grid';
-            
-            setTimeout(() => scrollToSection('outputSection'), 100);
-        }
-
-        // ATUALIZAÇÃO VISUAL DO HISTÓRICO
-        function atualizarHistorico() {
-            const historySection = document.getElementById('historySection');
-            const historyItems = document.getElementById('historyItems');
-            
-            if (historico.length === 0) {
-                historySection.style.display = 'none';
-                return;
-            }
-            
-            historySection.style.display = 'block';
-            historyItems.innerHTML = '';
-            
-            historico.forEach(termo => {
-                const item = document.createElement('div');
-                item.className = 'history-item';
-                item.textContent = termo;
-                item.onclick = () => {
-                    document.getElementById('termo').value = termo;
-                    traduzir();
-                };
-                historyItems.appendChild(item);
-            });
-        }
-
-        // COPIAR TEXTO PARA A ÁREA DE TRANSFERÊNCIA
-        function copyToClipboard(botao, elementoId) {
-            const texto = document.getElementById(elementoId).textContent;
-            navigator.clipboard.writeText(texto).then(() => {
-                const textoOriginal = botao.textContent;
-                botao.textContent = 'Copiado! ✓';
-                botao.classList.add('copied');
-                setTimeout(() => {
-                    botao.textContent = textoOriginal;
-                    botao.classList.remove('copied');
-                }, 2000);
-            });
-        }
-
-        // COMPARTILHAR RESULTADOS (API nativa de compartilhamento Mobile)
-        function compartilhar() {
-            const termo = document.getElementById('termo').value;
-            const traducao = document.getElementById('traducao').textContent;
-            
-            if (navigator.share) {
-                navigator.share({
-                    title: `Decifra - ${termo}`,
-                    text: `Olha o que significa "${termo}": ${traducao}`,
-                    url: window.location.href
-                }).catch(console.error);
-            } else {
-                alert('A API de compartilhamento não é suportada por esse navegador. Mas você pode copiar os cards de texto!');
-            }
-        }
-
-        // RODA O EXEMPLO DO BOTÃO "VER DEMO"
-        function loadDemo() {
-            document.getElementById('termo').value = 'Bottleneck';
-            document.getElementById('area').value = 'Computação';
-            document.getElementById('contexto').value = '';
-            traduzir();
-        }
-
-        // Carrega o histórico local quando a página abrir
-        window.onload = atualizarHistorico;
-    </script>
 </body>
+
 </html>
