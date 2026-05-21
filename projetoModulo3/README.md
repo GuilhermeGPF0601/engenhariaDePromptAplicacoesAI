@@ -1,3 +1,9 @@
+Alunos: 
+Guilherme Peres Figueredo
+Juan Henrique de Brito Alves
+Merielly Dos Santos Alves
+
+
 # Projeto Módulo 3 – Currículo Gov | Vibecode
 
 ## 📌 Desafio Escolhido
