@@ -6,7 +6,7 @@ Merielly Dos Santos Alves**
 
 # Projeto Módulo 3 – Currículo Gov | Vibecode
 
-## 📌 Desafio Escolhido
+## 📌 Desafio Escolhido 
 
 **Criação de um gerador de currículos com identidade visual governamental brasileira.**
 
