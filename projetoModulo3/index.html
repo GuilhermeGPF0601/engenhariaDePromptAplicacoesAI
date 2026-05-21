@@ -3,14 +3,14 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
   <title>Currículo Gov</title>
 
   <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- PDF -->
+  <!-- html2pdf -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
   <!-- Fonte -->
@@ -31,7 +31,6 @@
     body{
       font-family:'Inter',sans-serif;
       background:#eef2f7;
-      overflow:hidden;
       color:#0f172a;
     }
 
@@ -49,20 +48,30 @@
       );
     }
 
-    .sidebar-scroll{
-      scrollbar-width:thin;
+    .layout{
+      display:flex;
+      height:calc(100vh - 6px);
     }
 
-    .sidebar-scroll::-webkit-scrollbar{
-      width:6px;
+    /* SIDEBAR */
+
+    .sidebar{
+      width:420px;
+      min-width:420px;
+      background:#f8fafc;
+      border-right:1px solid #e2e8f0;
+      overflow-y:auto;
     }
 
-    .sidebar-scroll::-webkit-scrollbar-thumb{
-      background:#cbd5e1;
-      border-radius:999px;
+    .sidebar-content{
+      padding:24px;
     }
 
-    /* CAMPOS */
+    .sidebar-header{
+      background:#001f5b;
+      color:white;
+      padding:28px 32px;
+    }
 
     .field{
       width:100%;
@@ -70,9 +79,9 @@
       border-radius:14px;
       background:white;
       padding:14px;
-      transition:0.2s;
       font-size:14px;
       resize:none;
+      transition:0.2s;
       color:#0f172a;
     }
 
@@ -84,44 +93,47 @@
 
     .label{
       display:block;
+      margin-bottom:8px;
       font-size:13px;
       font-weight:700;
       color:#334155;
-      margin-bottom:7px;
     }
 
     .group-card{
       background:white;
       border-radius:20px;
       padding:22px;
+      margin-bottom:20px;
       border:1px solid #e2e8f0;
       box-shadow:0 2px 10px rgba(0,0,0,0.04);
     }
 
-    /* CURRÍCULO */
+    /* PREVIEW */
+
+    .preview-area{
+      flex:1;
+      overflow:auto;
+      padding:40px;
+    }
 
     .a4{
 
       width:210mm;
 
-      min-height:297mm;
-
       background:white;
 
       margin:auto;
 
-      padding:20mm 18mm;
+      padding:18mm 16mm;
 
       box-shadow:0 10px 40px rgba(0,0,0,0.10);
-
-      box-sizing:border-box;
 
     }
 
     .gov-header{
       border-left:6px solid #001f5b;
       padding-left:18px;
-      margin-bottom:42px;
+      margin-bottom:40px;
     }
 
     .section-title{
@@ -136,9 +148,7 @@
     }
 
     .cv-section{
-      margin-bottom:28px;
-      page-break-inside:avoid;
-      break-inside:avoid;
+      margin-bottom:24px;
     }
 
     .preview-text{
@@ -149,31 +159,52 @@
       color:#334155;
     }
 
-    /* RESPONSIVO */
+    .btn{
+      width:100%;
+      background:#001f5b;
+      color:white;
+      border:none;
+      border-radius:18px;
+      padding:16px;
+      font-weight:700;
+      cursor:pointer;
+      transition:0.2s;
+    }
+
+    .btn:hover{
+      background:#002d86;
+    }
 
     @media(max-width:1200px){
 
-      body{
-        overflow:auto;
+      .layout{
+        flex-direction:column;
+        height:auto;
+      }
+
+      .sidebar{
+        width:100%;
+        min-width:100%;
+      }
+
+      .preview-area{
+        padding:20px;
       }
 
       .a4{
         width:100%;
-        min-height:auto;
       }
 
     }
 
-    /* PRINT */
-
     @media print{
 
-      body{
-        background:white;
+      .sidebar{
+        display:none;
       }
 
-      .no-print{
-        display:none !important;
+      .preview-area{
+        padding:0;
       }
 
       .a4{
@@ -188,155 +219,101 @@
 
 <body>
 
-  <!-- BARRA GOV -->
   <div class="gov-bar"></div>
 
-  <div class="flex h-[calc(100vh-6px)] overflow-hidden">
+  <div class="layout">
 
     <!-- SIDEBAR -->
-    <aside
-      class="w-[420px] min-w-[420px] bg-[#f8fafc] border-r border-slate-200 flex flex-col no-print">
+    <aside class="sidebar">
 
-      <!-- HEADER -->
-      <div class="bg-[#001f5b] text-white px-8 py-7 shadow-lg">
+      <div class="sidebar-header">
 
-        <div class="flex items-center justify-between">
+        <h1 style="font-size:28px;font-weight:800;">
+          Currículo Gov
+        </h1>
 
-          <div>
-
-            <h1 class="text-2xl font-extrabold tracking-tight">
-              Currículo Gov
-            </h1>
-
-            <p class="text-blue-100 text-sm mt-1">
-              Design Sprint Brasileiro
-            </p>
-
-          </div>
-
-          <div class="bg-white/10 rounded-xl p-3">
-
-            <svg xmlns="http://www.w3.org/2000/svg"
-              class="h-7 w-7"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor">
-
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-
-            </svg>
-
-          </div>
-
-        </div>
+        <p style="opacity:0.8;margin-top:6px;">
+          Design Sprint Brasileiro
+        </p>
 
       </div>
 
-      <!-- FORM -->
-      <div class="flex-1 overflow-y-auto sidebar-scroll p-6 space-y-5">
+      <div class="sidebar-content">
 
         <!-- DADOS -->
         <div class="group-card">
 
-          <div class="flex items-center gap-3 mb-5">
+          <h2 style="font-size:18px;font-weight:700;margin-bottom:20px;">
+            Dados Pessoais
+          </h2>
 
-            <div class="bg-blue-100 text-blue-900 p-2 rounded-xl">
-              👤
-            </div>
+          <div style="margin-bottom:16px;">
 
-            <div>
+            <label class="label">
+              Nome Completo
+            </label>
 
-              <h2 class="font-bold text-slate-800">
-                Dados Pessoais
-              </h2>
-
-              <p class="text-sm text-slate-500">
-                Informações principais
-              </p>
-
-            </div>
+            <input
+              id="name"
+              maxlength="45"
+              class="field"
+              placeholder="Digite seu nome completo">
 
           </div>
 
-          <div class="space-y-4">
+          <div style="margin-bottom:16px;">
 
-            <div>
+            <label class="label">
+              Cargo Desejado
+            </label>
 
-              <label class="label">
-                Nome Completo
-              </label>
+            <input
+              id="role"
+              maxlength="55"
+              class="field"
+              placeholder="Ex: Assistente Administrativo">
 
-              <input
-                id="name"
-                class="field"
-                maxlength="45"
-                placeholder="Digite seu nome completo">
+          </div>
 
-            </div>
+          <div style="margin-bottom:16px;">
 
-            <div>
+            <label class="label">
+              Cidade
+            </label>
 
-              <label class="label">
-                Cargo Desejado
-              </label>
+            <input
+              id="location"
+              maxlength="30"
+              class="field"
+              placeholder="Brasília - DF">
 
-              <input
-                id="role"
-                class="field"
-                maxlength="55"
-                placeholder="Ex: Assistente Administrativo">
+          </div>
 
-            </div>
+          <div style="margin-bottom:16px;">
 
-            <div class="grid grid-cols-2 gap-4">
+            <label class="label">
+              Telefone
+            </label>
 
-              <div>
+            <input
+              id="phone"
+              maxlength="20"
+              class="field"
+              placeholder="(61) 99999-9999">
 
-                <label class="label">
-                  Cidade
-                </label>
+          </div>
 
-                <input
-                  id="location"
-                  class="field"
-                  maxlength="30"
-                  placeholder="Brasília - DF">
+          <div>
 
-              </div>
+            <label class="label">
+              E-mail
+            </label>
 
-              <div>
-
-                <label class="label">
-                  Telefone
-                </label>
-
-                <input
-                  id="phone"
-                  class="field"
-                  maxlength="20"
-                  placeholder="(61) 99999-9999">
-
-              </div>
-
-            </div>
-
-            <div>
-
-              <label class="label">
-                E-mail
-              </label>
-
-              <input
-                id="email"
-                class="field"
-                maxlength="45"
-                placeholder="email@email.com">
-
-            </div>
+            <input
+              id="email"
+              maxlength="45"
+              class="field"
+              placeholder="email@email.com">
 
           </div>
 
@@ -345,138 +322,70 @@
         <!-- PERFIL -->
         <div class="group-card">
 
-          <div class="flex items-center gap-3 mb-5">
-
-            <div class="bg-green-100 text-green-900 p-2 rounded-xl">
-              📝
-            </div>
-
-            <div>
-
-              <h2 class="font-bold text-slate-800">
-                Perfil Profissional
-              </h2>
-
-              <p class="text-sm text-slate-500">
-                Resumo profissional
-              </p>
-
-            </div>
-
-          </div>
+          <h2 style="font-size:18px;font-weight:700;margin-bottom:20px;">
+            Perfil Profissional
+          </h2>
 
           <textarea
             id="summary"
             rows="6"
             maxlength="700"
             class="field"
-            placeholder="Descreva seu perfil profissional, competências e objetivos."></textarea>
+            placeholder="Descreva seu perfil profissional."></textarea>
 
         </div>
 
         <!-- EXPERIÊNCIA -->
         <div class="group-card">
 
-          <div class="flex items-center gap-3 mb-5">
-
-            <div class="bg-yellow-100 text-yellow-900 p-2 rounded-xl">
-              💼
-            </div>
-
-            <div>
-
-              <h2 class="font-bold text-slate-800">
-                Experiência
-              </h2>
-
-              <p class="text-sm text-slate-500">
-                Histórico profissional
-              </p>
-
-            </div>
-
-          </div>
+          <h2 style="font-size:18px;font-weight:700;margin-bottom:20px;">
+            Experiência
+          </h2>
 
           <textarea
             id="experience"
-            rows="7"
-            maxlength="1200"
+            rows="8"
+            maxlength="1500"
             class="field"
-            placeholder="Empresa - Cargo&#10;Período&#10;Atividades realizadas"></textarea>
+            placeholder="Empresa - Cargo&#10;Período&#10;Atividades"></textarea>
 
         </div>
 
         <!-- FORMAÇÃO -->
         <div class="group-card">
 
-          <div class="flex items-center gap-3 mb-5">
-
-            <div class="bg-purple-100 text-purple-900 p-2 rounded-xl">
-              🎓
-            </div>
-
-            <div>
-
-              <h2 class="font-bold text-slate-800">
-                Formação
-              </h2>
-
-              <p class="text-sm text-slate-500">
-                Formação acadêmica
-              </p>
-
-            </div>
-
-          </div>
+          <h2 style="font-size:18px;font-weight:700;margin-bottom:20px;">
+            Formação
+          </h2>
 
           <textarea
             id="education"
             rows="5"
             maxlength="700"
             class="field"
-            placeholder="Curso - Instituição&#10;Ano"></textarea>
+            placeholder="Curso - Instituição"></textarea>
 
         </div>
 
         <!-- HABILIDADES -->
         <div class="group-card">
 
-          <div class="flex items-center gap-3 mb-5">
-
-            <div class="bg-red-100 text-red-900 p-2 rounded-xl">
-              ⚡
-            </div>
-
-            <div>
-
-              <h2 class="font-bold text-slate-800">
-                Habilidades
-              </h2>
-
-              <p class="text-sm text-slate-500">
-                Competências e ferramentas
-              </p>
-
-            </div>
-
-          </div>
+          <h2 style="font-size:18px;font-weight:700;margin-bottom:20px;">
+            Habilidades
+          </h2>
 
           <textarea
             id="skills"
             rows="5"
             maxlength="500"
             class="field"
-            placeholder="Pacote Office&#10;Comunicação&#10;Organização"></textarea>
+            placeholder="Comunicação&#10;Pacote Office"></textarea>
 
         </div>
 
         <!-- BOTÃO -->
-        <button
-          id="downloadBtn"
-          class="w-full bg-[#001f5b] hover:bg-[#002d86] text-white font-bold py-4 rounded-2xl transition-all shadow-lg">
-
+        <button id="downloadBtn" class="btn">
           Exportar PDF
-
         </button>
 
       </div>
@@ -484,7 +393,7 @@
     </aside>
 
     <!-- PREVIEW -->
-    <main class="flex-1 overflow-auto p-10">
+    <main class="preview-area">
 
       <div id="curriculo" class="a4">
 
@@ -493,7 +402,12 @@
 
           <h1
             id="preview-name"
-            class="text-4xl font-extrabold text-slate-900 break-words">
+            style="
+              font-size:38px;
+              font-weight:800;
+              color:#0f172a;
+              word-break:break-word;
+            ">
 
             Seu Nome
 
@@ -501,13 +415,26 @@
 
           <p
             id="preview-role"
-            class="text-xl text-[#0038a8] font-semibold mt-2 break-words">
+            style="
+              font-size:22px;
+              color:#0038a8;
+              font-weight:600;
+              margin-top:10px;
+            ">
 
             Cargo Desejado
 
           </p>
 
-          <div class="flex flex-wrap gap-5 mt-5 text-sm text-slate-600">
+          <div
+            style="
+              display:flex;
+              flex-wrap:wrap;
+              gap:18px;
+              margin-top:20px;
+              font-size:14px;
+              color:#475569;
+            ">
 
             <span id="preview-location">
               Brasília - DF
@@ -532,12 +459,8 @@
             Perfil Profissional
           </h2>
 
-          <p
-            id="preview-summary"
-            class="preview-text">
-
+          <p id="preview-summary" class="preview-text">
             Seu resumo profissional aparecerá aqui.
-
           </p>
 
         </section>
@@ -549,12 +472,8 @@
             Experiência Profissional
           </h2>
 
-          <p
-            id="preview-experience"
-            class="preview-text">
-
+          <p id="preview-experience" class="preview-text">
             Suas experiências aparecerão aqui.
-
           </p>
 
         </section>
@@ -566,12 +485,8 @@
             Formação Acadêmica
           </h2>
 
-          <p
-            id="preview-education"
-            class="preview-text">
-
+          <p id="preview-education" class="preview-text">
             Sua formação aparecerá aqui.
-
           </p>
 
         </section>
@@ -583,12 +498,8 @@
             Habilidades
           </h2>
 
-          <p
-            id="preview-skills"
-            class="preview-text">
-
+          <p id="preview-skills" class="preview-text">
             Suas habilidades aparecerão aqui.
-
           </p>
 
         </section>
@@ -614,7 +525,7 @@
       "skills"
     ];
 
-    // ATUALIZAÇÃO
+    // PREVIEW
     fields.forEach(field => {
 
       const input = document.getElementById(field);
@@ -622,26 +533,24 @@
 
       input.addEventListener("input", () => {
 
-        let value = input.value.replace(/\s{3,}/g, ' ');
-
-        input.value = value;
-
         preview.textContent =
-          value || input.placeholder || "";
+          input.value || input.placeholder;
 
       });
 
     });
 
     // EXPORTAR PDF
-    document.getElementById("downloadBtn")
+    document
+    .getElementById("downloadBtn")
     .addEventListener("click", async () => {
 
-      const element = document.getElementById("curriculo");
+      const element =
+        document.getElementById("curriculo");
 
-      const opt = {
+      const options = {
 
-        margin:[10,10,10,10],
+        margin:0,
 
         filename:'curriculo-profissional.pdf',
 
@@ -652,11 +561,9 @@
 
         html2canvas:{
 
-          scale:4,
+          scale:2,
 
-          useCORS:true,
-
-          scrollY:0
+          useCORS:true
 
         },
 
@@ -672,14 +579,14 @@
 
         pagebreak:{
 
-          mode:['avoid-all','css','legacy']
+          mode:['css','legacy']
 
         }
 
       };
 
       await html2pdf()
-      .set(opt)
+      .set(options)
       .from(element)
       .save();
 
