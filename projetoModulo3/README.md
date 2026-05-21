@@ -58,7 +58,7 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 - 💡 Ideação de funcionalidades e fluxos de usuário
 - 📋 Planejamento da arquitetura da aplicação
 
-### **Google Cloud**
+### **Google Claude**
 - 🚀 Aprimoramento da estrutura do código
 - ⚙️ Otimizações de performance e responsividade
 - 🔧 Desenvolvimento de funcionalidades complexas (PDF export, validações)
@@ -119,7 +119,7 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 - Revisão e validação da interface final
 
 #### 👨‍💻 **Juan Henrique**
-- Aprimoramentos no Google Cloud para otimização do código
+- Aprimoramentos no Google Claude para otimização do código
 - Desenvolvimento de funcionalidades de exportação e validações
 - Refinamento da lógica JavaScript e event handlers
 - Testes de compatibilidade e performance
@@ -184,6 +184,6 @@ Este projeto é parte da disciplina de **Engenharia de Prompts e Aplicações de
 ---
 
 **✨ Desenvolvido por:** Guilherme Peres, Juan Henrique e Merielly Dos Santos  
-**🤖 Com apoio de:** Gemini Pro, Google Cloud e GitHub Copilot  
+**🤖 Com apoio de:** Gemini Pro, Google Claude e GitHub Copilot  
 **🎓 Disciplina:** Engenharia de Prompts e Aplicações de IA  
 **📅 Semestre:** 2026.1
