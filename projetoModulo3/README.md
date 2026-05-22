@@ -6,8 +6,8 @@ Merielly Dos Santos Alves**
 
 # Projeto Módulo 3 – Currículo Gov | LowCode
 
-## 🤖 Ferramentas de IA Utilizadas
-
+#### 🤖 Ferramentas de IA Utilizadas
+### **Bubble**
 
 ### **Gemini Pro**
 - 🔍 Geração e refinamento de prompts para estruturação do projeto
