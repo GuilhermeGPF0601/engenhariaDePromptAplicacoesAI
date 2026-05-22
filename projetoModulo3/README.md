@@ -6,29 +6,6 @@ Merielly Dos Santos Alves**
 
 # Projeto Módulo 3 – Currículo Gov | LowCode
 
-#### 🤖 Ferramentas de IA Utilizadas
-### **Bubble**
-
-### **Gemini Pro**
-- 🔍 Geração e refinamento de prompts para estruturação do projeto
-- 💡 Ideação de funcionalidades e fluxos de usuário
-- 📋 Planejamento da arquitetura da aplicação
-  
-
-### **Google Claude**
-- 🚀 Aprimoramento da estrutura do código
-- ⚙️ Otimizações de performance e responsividade
-
-
-### **GitHub Copilot**
-- 📚 Geração de documentação técnica e README
-- 📝 Criação de comentários e documentação inline do código
-- ✍️ Sugestões de melhorias na estrutura e nomenclatura
-
----
-
-
-
 ## 📌 Desafio Escolhido 
 
 **Criação de um gerador de currículos com identidade visual governamental brasileira.**
@@ -118,6 +95,14 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 - ✅ *Solução proposta*: Testar com polyfills ou considerar transpilação com Babel para produção
 
 ---
+#### 🤖 Ferramentas de IA Utilizadas
+### **Bubble**
+
+### **Gemini Pro**
+  
+### **Google Claude**
+
+### **GitHub Copilot**
 
 ## 👥 Colaboração
 
