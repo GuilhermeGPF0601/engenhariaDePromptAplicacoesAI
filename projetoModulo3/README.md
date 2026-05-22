@@ -5,9 +5,7 @@ Merielly Dos Santos Alves**
 
 
 # Projeto Módulo 3 – Currículo Gov | LowCode
-### **Ferramenta LowCode Utilizada**
 
-## **Bubble AI**
 
 
 ## 📌 Desafio Escolhido 
@@ -63,8 +61,6 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 ## 🤖 Ferramentas de IA Utilizadas
 
-### **Bubble AI**
-- Geração do Código e estruturação
 
 ### **Gemini Pro**
 - 🔍 Geração e refinamento de prompts para estruturação do projeto
