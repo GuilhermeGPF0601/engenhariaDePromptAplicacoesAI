@@ -6,6 +6,27 @@ Merielly Dos Santos Alves**
 
 # Projeto Módulo 3 – Currículo Gov | LowCode
 
+## 🤖 Ferramentas de IA Utilizadas
+
+
+### **Gemini Pro**
+- 🔍 Geração e refinamento de prompts para estruturação do projeto
+- 💡 Ideação de funcionalidades e fluxos de usuário
+- 📋 Planejamento da arquitetura da aplicação
+  
+
+### **Google Claude**
+- 🚀 Aprimoramento da estrutura do código
+- ⚙️ Otimizações de performance e responsividade
+
+
+### **GitHub Copilot**
+- 📚 Geração de documentação técnica e README
+- 📝 Criação de comentários e documentação inline do código
+- ✍️ Sugestões de melhorias na estrutura e nomenclatura
+
+---
+
 
 
 ## 📌 Desafio Escolhido 
@@ -59,26 +80,6 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 ---
 
-## 🤖 Ferramentas de IA Utilizadas
-
-
-### **Gemini Pro**
-- 🔍 Geração e refinamento de prompts para estruturação do projeto
-- 💡 Ideação de funcionalidades e fluxos de usuário
-- 📋 Planejamento da arquitetura da aplicação
-  
-
-### **Google Claude**
-- 🚀 Aprimoramento da estrutura do código
-- ⚙️ Otimizações de performance e responsividade
-
-
-### **GitHub Copilot**
-- 📚 Geração de documentação técnica e README
-- 📝 Criação de comentários e documentação inline do código
-- ✍️ Sugestões de melhorias na estrutura e nomenclatura
-
----
 
 ## ✅ Vantagens Identificadas
 
