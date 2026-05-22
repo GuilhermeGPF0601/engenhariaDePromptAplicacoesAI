@@ -10,7 +10,7 @@ Merielly Dos Santos Alves**
 
 **Criação de um gerador de currículos com identidade visual governamental brasileira.**
 
-O projeto visa desenvolver uma aplicação web que permita aos usuários criar e exportar currículos profissionais com design inspirado na identidade visual do governo brasileiro (cores: verde, amarelo e azul).
+O projeto visa desenvolver uma aplicação web que permita aos usuários criar e exportar currículos profissionais.
 
 ---
 
