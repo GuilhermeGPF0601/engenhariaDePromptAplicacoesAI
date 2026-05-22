@@ -4,7 +4,11 @@ Juan Henrique de Brito Alves |
 Merielly Dos Santos Alves**
 
 
-# Projeto Módulo 3 – Currículo Gov | Vibecode
+# Projeto Módulo 3 – Currículo Gov | LowCode
+### **Ferramenta LowCode Utilizada**
+
+## **Bubble AI**
+- Geração do Código e estruturação
 
 ## 📌 Desafio Escolhido 
 
@@ -59,15 +63,19 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 ## 🤖 Ferramentas de IA Utilizadas
 
+### **Bubble AI**
+- Geração do Código e estruturação
+
 ### **Gemini Pro**
 - 🔍 Geração e refinamento de prompts para estruturação do projeto
 - 💡 Ideação de funcionalidades e fluxos de usuário
 - 📋 Planejamento da arquitetura da aplicação
+  
 
 ### **Google Claude**
 - 🚀 Aprimoramento da estrutura do código
 - ⚙️ Otimizações de performance e responsividade
-- 🔧 Desenvolvimento de funcionalidades complexas (PDF export, validações)
+
 
 ### **GitHub Copilot**
 - 📚 Geração de documentação técnica e README
