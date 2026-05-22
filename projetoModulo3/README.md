@@ -56,13 +56,20 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 ---
 
-## ✅ Vantagens Identificadas
+## ✅ Vantagens do LowCode com Bubble
 
-1. **Prototipagem Rápida** – Desenvolvimento ágil sem necessidade de expertise em múltiplas linguagens
-2. **Interface Visual Intuitiva** – Criação de workflows e lógica sem código
-3. **Escalabilidade** – Fácil expansão de funcionalidades conforme o projeto evolui
-4. **Customização flexível** – Drag-and-drop de componentes e estilização visual
-5. **Acesso Universal** – Aplicação disponível online sem necessidade de instalação
+1. **Redução de Tempo de Desenvolvimento** – 5-10x mais rápido que desenvolvimento tradicional
+2. **Democratização do Desenvolvimento** – Profissionais não-técnicos podem criar aplicações completas
+3. **Redução de Custos** – Menos necessidade de equipes grandes de desenvolvedores
+4. **Ciclos de Iteração Rápidos** – Ajustes e melhorias em minutos, não dias
+5. **Componentes Pré-Construídos** – Uso de elementos prontos acelera o desenvolvimento
+6. **Melhor Produtividade** – Equipe foca em lógica de negócio, não em complexidade técnica
+7. **Manutenção Simplificada** – Código visual é mais fácil de entender e modificar
+8. **Infraestrutura Gerenciada** – Sem preocupação com servidores, backup ou segurança
+9. **Integração Facilitada** – Conexão com APIs e serviços externos de forma simples e intuitiva
+10. **Multi-Plataforma Automático** – Aplicação funciona perfeitamente em desktop e mobile
+11. **Controle Visual Total** – Design e funcionalidade completamente integrados
+12. **Escalabilidade** – Plataforma cresce naturalmente com as necessidades do projeto
 
 ---
 
@@ -72,7 +79,7 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 2. **Customização avançada** – Algumas formatações muito específicas podem ser limitadas
 3. **Compatibilidade de navegadores** – Algumas funcionalidades podem não funcionar perfeitamente em navegadores antigos
 4. **Limite de conteúdo** – PDFs muito longos podem ter problemas de paginação automática
-5. **Curva de aprendizado** – Novo usuários precisam se familiarizar com a interface do Bubble
+5. **Curva de aprendizado** – Novos usuários precisam se familiarizar com a interface do Bubble
 
 ---
 
@@ -94,15 +101,17 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 ---
 
-#### 🤖 Ferramentas de IA Utilizadas
+## 🤖 Ferramentas de IA Utilizadas
 
 ### **Bubble**
 
-### **Gemini Pro**
-  
-### **Google Claude**
+Plataforma LowCode utilizada para desenvolvimento completo da aplicação de gerador de currículos, incluindo:
+- Design da interface visual
+- Construção de workflows e lógica de negócio
+- Integração com APIs para exportação de PDFs
+- Gerenciamento de dados e autenticação
 
-### **GitHub Copilot**
+---
 
 ## 👥 Colaboração
 
@@ -110,26 +119,26 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 #### 👨‍💻 **Guilherme Peres**
 - Definição da estrutura e layout da aplicação no Bubble
-- Integração e refinamento de prompts no Gemini Pro
+- Configuração dos workflows principais
 - Coordenação das funcionalidades principais com o grupo
 - Revisão e validação da interface final
 
 #### 👨‍💻 **Juan Henrique**
-- Aprimoramentos no Google Claude para otimização da lógica
-- Desenvolvimento de funcionalidades de exportação e validações
-- Refinamento da lógica de workflows do Bubble
+- Desenvolvimento de funcionalidades de exportação e validações no Bubble
+- Refinamento da lógica de workflows
+- Integração de APIs para geração de PDFs
 - Testes de compatibilidade e performance
 
 #### 👩‍💻 **Merielly Dos Santos**
-- Documentação completa com GitHub Copilot
+- Documentação completa do projeto
 - Criação do README e guias técnicos
 - Estruturação de documentação e processos
-- Organização e versionamento da documentação do projeto
+- Organização e versionamento da documentação
 
 ### Como Nos Organizamos
 
 - 📌 **Divisão clara de tarefas**: Cada membro focou em sua área específica
-- 🔄 **Iterações com IA**: Uso contínuo de ferramentas de IA para aprimoramento
+- 🔄 **Desenvolvimento integrado**: Trabalho contínuo em melhorias e refinamentos
 - 📊 **Reuniões de alinhamento**: Sincronização periódica sobre progresso e ajustes
 - 🤝 **Revisão colaborativa**: Validação mútua das contribuições finais
 
@@ -168,8 +177,8 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 - 🔗 **Integração com APIs** – Conectar com serviços de emprego e recrutamento
 - 📧 **Envio por email** – Funcionalidade de compartilhamento direto
 - 📱 **Versão mobile otimizada** – Progressive Web App (PWA)
-- 🤖 **IA generativa** – Sugestões automáticas de conteúdo via APIs de IA
 - 📊 **Analytics** – Dashboard de rastreamento de downloads e visualizações
+- 🔄 **Sincronização em nuvem** – Acesso aos currículos em qualquer dispositivo
 
 ---
 
@@ -180,6 +189,6 @@ Este projeto é parte da disciplina de **Engenharia de Prompts e Aplicações de
 ---
 
 **✨ Desenvolvido por:** Guilherme Peres, Juan Henrique e Merielly Dos Santos  
-**🤖 Com apoio de:** Gemini Pro, Google Claude e GitHub Copilot  
+**🔧 Plataforma:** Bubble (LowCode)  
 **🎓 Disciplina:** Engenharia de Prompts e Aplicações de IA  
 **📅 Semestre:** 2026.1
