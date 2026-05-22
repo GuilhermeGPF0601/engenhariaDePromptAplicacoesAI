@@ -8,7 +8,7 @@ Merielly Dos Santos Alves**
 ### **Ferramenta LowCode Utilizada**
 
 ## **Bubble AI**
-- Geração do Código e estruturação
+
 
 ## 📌 Desafio Escolhido 
 
