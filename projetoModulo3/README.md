@@ -10,7 +10,7 @@ Merielly Dos Santos Alves**
 
 **Criação de um gerador de currículos com identidade visual governamental brasileira.**
 
-O projeto visa desenvolver uma aplicação web que permita aos usuários criar e exportar currículos profissionais com design inspirado na identidade visual do governo brasileiro (cores: verde, amarelo e azul). A solução oferece uma experiência de preenchimento intuitiva com preview em tempo real e exportação em PDF.
+O projeto visa desenvolver uma aplicação web que permita aos usuários criar e exportar currículos profissionais com design inspirado na identidade visual do governo brasileiro (cores: verde, amarelo e azul).
 
 ---
 
@@ -26,55 +26,53 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 ### Como Funciona
 
-1. **Entrada de dados**: O usuário preenche as informações na sidebar esquerda (nome, cargo, experiência, etc.)
-2. **Visualização ao vivo**: O currículo é atualizado em tempo real na área de preview central
+1. **Entrada de dados**: O usuário preenche as informações no formulário (nome, cargo, experiência, etc.)
+2. **Visualização ao vivo**: O currículo é atualizado em tempo real na área de preview
 3. **Validação**: Campos têm limite de caracteres e formatos específicos
 4. **Exportação**: Ao clicar em "Exportar PDF", a aplicação gera um arquivo profissional
 
 ### Tecnologias Utilizadas
 
-- **HTML5** – estrutura e semântica
-- **CSS3** – estilos customizados com media queries
-- **Tailwind CSS** – framework de utilitários para design responsivo
-- **JavaScript** – lógica de atualização de preview e exportação
-- **html2pdf.js** – biblioteca para geração de PDFs
-- **Google Fonts** – tipografia Inter para visual limpo
+- **Bubble** – plataforma LowCode para desenvolvimento rápido de aplicações web
+- **Design responsivo** – interface intuitiva e otimizada para múltiplos dispositivos
+- **Integração de APIs** – processamento de dados e geração de PDFs
+- **UI/UX customizado** – design moderno alinhado à identidade visual governamental
 
 ---
 
 ## ⚙️ Plataforma Utilizada
 
-**Vibecode (HTML + CSS + JavaScript puro)**
+**Bubble (LowCode)**
 
 ### Justificativa da Escolha
 
-- 🎯 **Controle total** – liberdade total sobre design e funcionalidades
-- ⚡ **Performance** – aplicação leve e rápida, sem dependências externas complexas
-- 💰 **Custo zero** – sem taxas de plataforma ou limites de uso
-- 🔧 **Flexibilidade** – fácil customização e integração de bibliotecas
-- 📱 **Portabilidade** – funciona em qualquer navegador moderno
-- 🎨 **Design personalizado** – implementação exata da identidade visual governamental
+- 🎯 **Desenvolvimento rápido** – Criação de protótipos funcionais sem necessidade de código extenso
+- ⚡ **Produtividade** – Ambiente visual para designer e lógica de fluxo integrada
+- 💰 **Custo eficiente** – Sem necessidade de contratação de múltiplos desenvolvedores
+- 🔧 **Flexibilidade** – Fácil ajuste de layouts e funcionalidades em tempo real
+- 📱 **Responsividade nativa** – Suporte automático para diferentes dispositivos
+- 🎨 **Design profissional** – Ferramentas visuais para criação de interfaces polidas
+- ☁️ **Hospedagem incluída** – Plataforma gerencia infraestrutura e segurança
 
 ---
 
-
 ## ✅ Vantagens Identificadas
 
-1. **Prototipagem Rápida** – Desenvolvimento ágil sem necessidade de backend complexo
-2. **Interface Intuitiva** – Usuários com pouco conhecimento técnico conseguem criar currículos profissionais
-3. **Integração de Bibliotecas** – Uso de Tailwind e html2pdf sem configurações complexas
-4. **Customização Ilimitada** – Código aberto permite ajustes conforme necessário
-5. **Acesso Universal** – Funciona online via navegador, sem instalação necessária
+1. **Prototipagem Rápida** – Desenvolvimento ágil sem necessidade de expertise em múltiplas linguagens
+2. **Interface Visual Intuitiva** – Criação de workflows e lógica sem código
+3. **Escalabilidade** – Fácil expansão de funcionalidades conforme o projeto evolui
+4. **Customização flexível** – Drag-and-drop de componentes e estilização visual
+5. **Acesso Universal** – Aplicação disponível online sem necessidade de instalação
 
 ---
 
 ## ⚠️ Limitações Encontradas
 
-1. **Persistência de Dados** – Sem backend, dados não são salvos automaticamente (usuário perde informações ao recarregar)
-2. **Customização de Fontes** – Limitado às fontes disponíveis no Google Fonts
-3. **Formatação Avançada** – Dificuldade para formatação texto complexa (negrito, itálico inline no preview)
-4. **Compatibilidade de Navegadores** – Algumas funcionalidades podem não funcionar em navegadores antigos
-5. **Limite de Conteúdo** – PDFs muito longos podem ter problemas de paginação automática
+1. **Dependência de plataforma** – Vinculado ao ecossistema Bubble para manutenção e atualizações
+2. **Customização avançada** – Algumas formatações muito específicas podem ser limitadas
+3. **Compatibilidade de navegadores** – Algumas funcionalidades podem não funcionar perfeitamente em navegadores antigos
+4. **Limite de conteúdo** – PDFs muito longos podem ter problemas de paginação automática
+5. **Curva de aprendizado** – Novo usuários precisam se familiarizar com a interface do Bubble
 
 ---
 
@@ -83,19 +81,21 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 ### Como Lidamos com as Limitações
 
 **Problema: Perda de dados ao recarregar**
-- ✅ *Solução proposta*: Implementar localStorage para salvar automaticamente dados do formulário
+- ✅ *Solução implementada*: Bubble salva automaticamente dados em banco de dados integrado
 
 **Problema: Formatação limitada de texto**
-- ✅ *Solução criativa*: Uso de espacejamento CSS (pre-line) para preservar quebras de linha e estrutura do texto
+- ✅ *Solução criativa*: Uso de componentes customizados para preservar estrutura e formatação
 
 **Problema: Paginação em PDFs longos**
-- ✅ *Solução criativa*: Aplicação de `page-break-inside: avoid` nas seções CSS para melhor controle de quebras
+- ✅ *Solução criativa*: Configuração de seções com controle de quebras de página
 
 **Problema: Compatibilidade com navegadores antigos**
-- ✅ *Solução proposta*: Testar com polyfills ou considerar transpilação com Babel para produção
+- ✅ *Solução proposta*: Testes contínuos em navegadores modernos e suporte à plataforma
 
 ---
+
 #### 🤖 Ferramentas de IA Utilizadas
+
 ### **Bubble**
 
 ### **Gemini Pro**
@@ -109,22 +109,22 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 ### Responsabilidades e Contribuições
 
 #### 👨‍💻 **Guilherme Peres**
-- Definição da estrutura e layout da aplicação
+- Definição da estrutura e layout da aplicação no Bubble
 - Integração e refinamento de prompts no Gemini Pro
 - Coordenação das funcionalidades principais com o grupo
 - Revisão e validação da interface final
 
 #### 👨‍💻 **Juan Henrique**
-- Aprimoramentos no Google Claude para otimização do código
+- Aprimoramentos no Google Claude para otimização da lógica
 - Desenvolvimento de funcionalidades de exportação e validações
-- Refinamento da lógica JavaScript e event handlers
+- Refinamento da lógica de workflows do Bubble
 - Testes de compatibilidade e performance
 
 #### 👩‍💻 **Merielly Dos Santos**
 - Documentação completa com GitHub Copilot
 - Criação do README e guias técnicos
-- Estruturação de comentários e documentação inline
-- Organização da documentação do projeto
+- Estruturação de documentação e processos
+- Organização e versionamento da documentação do projeto
 
 ### Como Nos Organizamos
 
@@ -152,7 +152,6 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 ### Melhorias Sugeridas para o Protótipo
 
-- [ ] Implementar **localStorage** para persistência de dados
 - [ ] Adicionar **templates de currículo** alternativos
 - [ ] Suportar **múltiplos idiomas** (PT-BR, EN, ES)
 - [ ] Criar **campo de foto/avatar** com upload
@@ -160,15 +159,16 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 - [ ] Adicionar **temas personalizáveis** (cores, fontes)
 - [ ] Criar **preview de impressão** antes do PDF
 - [ ] Adicionar **validação de campos** (email, telefone)
+- [ ] Implementar **autossave** em tempo real
 
 ### Evoluções para Projeto Final
 
-- 🔐 **Backend com autenticação** – Usar Node.js/Express para salvar currículos por usuário
-- ☁️ **Cloud storage** – Armazenar PDFs em AWS S3 ou Google Cloud
-- 🔗 **API REST** – Integrar com serviços de emprego e recrutamento
+- 🔐 **Autenticação de usuários** – Login seguro com múltiplas opções
+- ☁️ **Cloud storage** – Armazenar PDFs em serviços em nuvem
+- 🔗 **Integração com APIs** – Conectar com serviços de emprego e recrutamento
 - 📧 **Envio por email** – Funcionalidade de compartilhamento direto
-- 📱 **Aplicativo mobile** – Versão React Native ou Flutter
-- 🤖 **IA generativa** – Sugestões automáticas de conteúdo via ChatGPT API
+- 📱 **Versão mobile otimizada** – Progressive Web App (PWA)
+- 🤖 **IA generativa** – Sugestões automáticas de conteúdo via APIs de IA
 - 📊 **Analytics** – Dashboard de rastreamento de downloads e visualizações
 
 ---
