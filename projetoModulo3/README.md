@@ -1,16 +1,15 @@
-# Alunos: 
-**Guilherme Peres Figueredo |
-Juan Henrique de Brito Alves |
-Merielly Dos Santos Alves**
+# Alunos
+**Guilherme Peres Figueredo | Juan Henrique de Brito Alves | Merielly Dos Santos Alves**
 
+---
 
-# Projeto Módulo 3 – Currículo Gov | LowCode
+# Projeto Módulo 3 – Low Code/No Code/Vibecode
 
-## 📌 Desafio Escolhido 
+## 📌 Desafio Escolhido
 
 **Criação de um gerador de currículos com identidade visual governamental brasileira.**
 
-O projeto visa desenvolver uma aplicação web que permita aos usuários criar e exportar currículos profissionais.
+O projeto visa desenvolver uma aplicação web que permita aos usuários criar e exportar currículos profissionais com design profissional e responsivo.
 
 ---
 
@@ -31,12 +30,7 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 3. **Validação**: Campos têm limite de caracteres e formatos específicos
 4. **Exportação**: Ao clicar em "Exportar PDF", a aplicação gera um arquivo profissional
 
-### Tecnologias Utilizadas
-
-- **Bubble** – plataforma LowCode para desenvolvimento rápido de aplicações web
-- **Design responsivo** – interface intuitiva e otimizada para múltiplos dispositivos
-- **Integração de APIs** – processamento de dados e geração de PDFs
-- **UI/UX customizado** – design moderno alinhado à identidade visual governamental
+> Prints das telas e documentação detalhada estão na pasta `/docs`.
 
 ---
 
@@ -56,7 +50,7 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 ---
 
-## ✅ Vantagens do LowCode com Bubble
+## ✅ Vantagens Identificadas
 
 1. **Redução de Tempo de Desenvolvimento** – 5-10x mais rápido que desenvolvimento tradicional
 2. **Democratização do Desenvolvimento** – Profissionais não-técnicos podem criar aplicações completas
@@ -66,10 +60,8 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 6. **Melhor Produtividade** – Equipe foca em lógica de negócio, não em complexidade técnica
 7. **Manutenção Simplificada** – Código visual é mais fácil de entender e modificar
 8. **Infraestrutura Gerenciada** – Sem preocupação com servidores, backup ou segurança
-9. **Integração Facilitada** – Conexão com APIs e serviços externos de forma simples e intuitiva
+9. **Integração Facilitada** – Conexão com APIs e serviços externos de forma simples
 10. **Multi-Plataforma Automático** – Aplicação funciona perfeitamente em desktop e mobile
-11. **Controle Visual Total** – Design e funcionalidade completamente integrados
-12. **Escalabilidade** – Plataforma cresce naturalmente com as necessidades do projeto
 
 ---
 
@@ -77,7 +69,7 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 1. **Dependência de plataforma** – Vinculado ao ecossistema Bubble para manutenção e atualizações
 2. **Customização avançada** – Algumas formatações muito específicas podem ser limitadas
-3. **Compatibilidade de navegadores** – Algumas funcionalidades podem não funcionar perfeitamente em navegadores antigos
+3. **Compatibilidade de navegadores** – Algumas funcionalidades podem não funcionar em navegadores antigos
 4. **Limite de conteúdo** – PDFs muito longos podem ter problemas de paginação automática
 5. **Curva de aprendizado** – Novos usuários precisam se familiarizar com a interface do Bubble
 
@@ -85,7 +77,7 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 ## 📚 Reflexão Crítica
 
-### Como Lidamos com as Limitações
+### Como o Grupo Lidou com as Limitações
 
 **Problema: Perda de dados ao recarregar**
 - ✅ *Solução implementada*: Bubble salva automaticamente dados em banco de dados integrado
@@ -101,21 +93,9 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 
 ---
 
-## 🤖 Ferramentas de IA Utilizadas
-
-### **Bubble**
-
-Plataforma LowCode utilizada para desenvolvimento completo da aplicação de gerador de currículos, incluindo:
-- Design da interface visual
-- Construção de workflows e lógica de negócio
-- Integração com APIs para exportação de PDFs
-- Gerenciamento de dados e autenticação
-
----
-
 ## 👥 Colaboração
 
-### Responsabilidades e Contribuições
+### Como o Grupo Organizou as Tarefas
 
 #### 👨‍💻 **Guilherme Peres**
 - Definição da estrutura e layout da aplicação no Bubble
@@ -124,7 +104,7 @@ Plataforma LowCode utilizada para desenvolvimento completo da aplicação de ger
 - Revisão e validação da interface final
 
 #### 👨‍💻 **Juan Henrique**
-- Desenvolvimento de funcionalidades de exportação e validações no Bubble
+- Desenvolvimento de funcionalidades de exportação e validações
 - Refinamento da lógica de workflows
 - Integração de APIs para geração de PDFs
 - Testes de compatibilidade e performance
@@ -135,12 +115,12 @@ Plataforma LowCode utilizada para desenvolvimento completo da aplicação de ger
 - Estruturação de documentação e processos
 - Organização e versionamento da documentação
 
-### Como Nos Organizamos
+### Metodologia de Trabalho
 
-- 📌 **Divisão clara de tarefas**: Cada membro focou em sua área específica
-- 🔄 **Desenvolvimento integrado**: Trabalho contínuo em melhorias e refinamentos
-- 📊 **Reuniões de alinhamento**: Sincronização periódica sobre progresso e ajustes
-- 🤝 **Revisão colaborativa**: Validação mútua das contribuições finais
+- 📌 **Divisão clara de tarefas** – Cada membro focou em sua área específica
+- 🔄 **Desenvolvimento integrado** – Trabalho contínuo em melhorias e refinamentos
+- 📊 **Reuniões de alinhamento** – Sincronização periódica sobre progresso e ajustes
+- 🤝 **Revisão colaborativa** – Validação mútua das contribuições finais
 
 ---
 
@@ -149,7 +129,7 @@ Plataforma LowCode utilizada para desenvolvimento completo da aplicação de ger
 | Informação | Detalhes |
 |-----------|----------|
 | **Data** | 11/05/2026 |
-| **Atividade** | Discussão crítica + mini-projeto de aplicação Low Code/No Code |
+| **Atividade** | Discussão crítica + mini-projeto de aplicação Low Code |
 | **Local** | Laboratório de informática / Quadro branco |
 | **Professor(a)** | Kadidja Valéria |
 | **Duração** | 4 horas |
@@ -170,7 +150,7 @@ Plataforma LowCode utilizada para desenvolvimento completo da aplicação de ger
 - [ ] Adicionar **validação de campos** (email, telefone)
 - [ ] Implementar **autossave** em tempo real
 
-### Evoluções para Projeto Final
+### Possíveis Evoluções para o Projeto Final da Unidade 3
 
 - 🔐 **Autenticação de usuários** – Login seguro com múltiplas opções
 - ☁️ **Cloud storage** – Armazenar PDFs em serviços em nuvem
