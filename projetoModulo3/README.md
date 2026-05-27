@@ -7,7 +7,7 @@
 
 ## 📌 Desafio Escolhido
 
-**Criação de um gerador de currículos com identidade visual governamental brasileira.**
+**Criação de um gerador de currículos.**
 
 O projeto visa desenvolver uma aplicação web que permita aos usuários criar e exportar currículos profissionais com design profissional e responsivo.
 
@@ -91,29 +91,6 @@ O projeto visa desenvolver uma aplicação web que permita aos usuários criar e
 **Problema: Compatibilidade com navegadores antigos**
 - ✅ *Solução proposta*: Testes contínuos em navegadores modernos e suporte à plataforma
 
----
-
-## 👥 Colaboração
-
-### Como o Grupo Organizou as Tarefas
-
-#### 👨‍💻 **Guilherme Peres**
-- Definição da estrutura e layout da aplicação no Bubble
-- Configuração dos workflows principais
-- Coordenação das funcionalidades principais com o grupo
-- Revisão e validação da interface final
-
-#### 👨‍💻 **Juan Henrique**
-- Desenvolvimento de funcionalidades de exportação e validações
-- Refinamento da lógica de workflows
-- Integração de APIs para geração de PDFs
-- Testes de compatibilidade e performance
-
-#### 👩‍💻 **Merielly Dos Santos**
-- Documentação completa do projeto
-- Criação do README e guias técnicos
-- Estruturação de documentação e processos
-- Organização e versionamento da documentação
 
 ### Metodologia de Trabalho
 
